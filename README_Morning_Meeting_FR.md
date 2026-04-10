@@ -1,8 +1,8 @@
 
-# Mon Workflow 3
+# Morning Meeting
 
 ## Vue d'ensemble
-"Mon Workflow 3" est un script d'automatisation robuste conçu pour récupérer et agréger des données financières et macroéconomiques provenant de diverses sources, telles que les indices boursiers, les matières premières et les taux. Le script utilise des API en temps réel, traite les données et fournit des résumés utiles pour aider les utilisateurs à suivre les conditions du marché mondial de manière efficace. Ce projet est basé sur [n8n](https://n8n.io/) pour une automatisation facile et une intégration avec des sources de données externes.
+"Morning Meeting" est un script d'automatisation robuste conçu pour récupérer et agréger des données financières et macroéconomiques provenant de diverses sources, telles que les indices boursiers, les matières premières et les taux. Le script utilise des API en temps réel, traite les données et fournit des résumés utiles pour aider les utilisateurs à suivre les conditions du marché mondial de manière efficace. Ce projet est basé sur [n8n](https://n8n.io/) pour une automatisation facile et une intégration avec des sources de données externes.
 
 ## Fonctionnalités
 - Récupère des données en temps réel des principaux indices boursiers, tels que le CAC40, le S&P 500, le Nasdaq, et d'autres.
