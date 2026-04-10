@@ -1,0 +1,2553 @@
+{
+    "name": "My workflow 3",
+    "nodes": [
+        {
+            "parameters": {
+                "rule": {
+                    "interval": [
+                        {
+                            "triggerAtHour": 9
+                        }
+                    ]
+                }
+            },
+            "type": "n8n-nodes-base.scheduleTrigger",
+            "typeVersion": 1.2,
+            "position": [
+                -1088,
+                1488
+            ],
+            "id": "fb99d3c1-ad4d-4e5a-8ec2-c27759fc783b",
+            "name": "Schedule Trigger"
+        },
+        {
+            "parameters": {
+                "jsCode": "// R\u00e9cup\u00e9ration du CSV brut\nconst csv = $json.data.trim();\nconst lines = csv.split(\"\\n\");\n\n// En-t\u00eates\nconst headers = lines[0].split(\",\");\nconst values = lines[1].split(\",\");\n\n// Construire un objet {colonne:valeur}\nlet row = {};\nheaders.forEach((h, i) => {\n  row[h.trim()] = values[i].trim();\n});\n\n// Convertir en nombres\nconst parse = (x) => (x && x !== \"N/D\") ? parseFloat(x) : null;\nconst close = parse(row.Close);\nconst open = parse(row.Open);\nconst change = (close && open) ? close - open : null;\n\n// Ici tu changes juste symbol + name + currency selon l\u2019indice\nreturn [{\n  category: \"index\",\n  symbol: \"CAC\",             \n  name: \"CAC 40\",               \n  currency: \"EUR\",              \n  value: close,\n  prev_close: open,\n  change_abs: change,\n  change_pct: (close && open) ? ((change / open) * 100).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                -144
+            ],
+            "id": "61aca07a-bec4-40cc-8a04-b15fc51e934d",
+            "name": "Code in JavaScript1"
+        },
+        {
+            "parameters": {
+                "jsCode": "// R\u00e9cup\u00e9ration du CSV brut\nconst csv = $json.data.trim();\nconst lines = csv.split(\"\\n\");\n\n// En-t\u00eates\nconst headers = lines[0].split(\",\");\nconst values = lines[1].split(\",\");\n\n// Construire un objet {colonne:valeur}\nlet row = {};\nheaders.forEach((h, i) => {\n  row[h.trim()] = values[i].trim();\n});\n\n// Convertir en nombres\nconst parse = (x) => (x && x !== \"N/D\") ? parseFloat(x) : null;\nconst close = parse(row.Close);\nconst open = parse(row.Open);\nconst change = (close && open) ? close - open : null;\n\n// Ici tu changes juste symbol + name + currency selon l\u2019indice\nreturn [{\n  category: \"index\",\n  symbol: \"spx\",              // \u26a1 adapte ici\n  name: \"S&P 500\",               // \u26a1 adapte ici\n  currency: \"USD\",              // \u26a1 USD pour indices US, EUR pour EU\n  value: close,\n  prev_close: open,\n  change_abs: change,\n  change_pct: (close && open) ? ((change / open) * 100).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                0
+            ],
+            "id": "e582e8aa-8085-4637-a309-d1cfec69248b",
+            "name": "Code in JavaScript2"
+        },
+        {
+            "parameters": {
+                "jsCode": "// R\u00e9cup\u00e9ration du CSV brut\nconst csv = $json.data.trim();\nconst lines = csv.split(\"\\n\");\n\n// En-t\u00eates\nconst headers = lines[0].split(\",\");\nconst values = lines[1].split(\",\");\n\n// Construire un objet {colonne:valeur}\nlet row = {};\nheaders.forEach((h, i) => {\n  row[h.trim()] = values[i].trim();\n});\n\n// Convertir en nombres\nconst parse = (x) => (x && x !== \"N/D\") ? parseFloat(x) : null;\nconst close = parse(row.Close);\nconst open = parse(row.Open);\nconst change = (close && open) ? close - open : null;\n\n// Ici tu changes juste symbol + name + currency selon l\u2019indice\nreturn [{\n  category: \"index\",\n  symbol: \"NDX\",              // \u26a1 adapte ici\n  name: \"Nasdaq 100\",               // \u26a1 adapte ici\n  currency: \"USD\",              // \u26a1 USD pour indices US, EUR pour EU\n  value: close,\n  prev_close: open,\n  change_abs: change,\n  change_pct: (close && open) ? ((change / open) * 100).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                144
+            ],
+            "id": "cfb445a6-afae-448a-bdc3-468995d8abf8",
+            "name": "Code in JavaScript3"
+        },
+        {
+            "parameters": {
+                "jsCode": "// R\u00e9cup\u00e9ration du CSV brut\nconst csv = $json.data.trim();\nconst lines = csv.split(\"\\n\");\n\n// En-t\u00eates\nconst headers = lines[0].split(\",\");\nconst values = lines[1].split(\",\");\n\n// Construire un objet {colonne:valeur}\nlet row = {};\nheaders.forEach((h, i) => {\n  row[h.trim()] = values[i].trim();\n});\n\n// Convertir en nombres\nconst parse = (x) => (x && x !== \"N/D\") ? parseFloat(x) : null;\nconst close = parse(row.Close);\nconst open = parse(row.Open);\nconst change = (close && open) ? close - open : null;\n\n// Ici tu changes juste symbol + name + currency selon l\u2019indice\nreturn [{\n  category: \"index\",\n  symbol: \"dax\",              // \u26a1 adapte ici\n  name: \"DAX\",               // \u26a1 adapte ici\n  currency: \"EUR\",              // \u26a1 USD pour indices US, EUR pour EU\n  value: close,\n  prev_close: open,\n  change_abs: change,\n  change_pct: (close && open) ? ((change / open) * 100).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                288
+            ],
+            "id": "aca461ef-1521-4b68-b391-b8eb19d2a063",
+            "name": "Code in JavaScript4"
+        },
+        {
+            "parameters": {
+                "jsCode": "// R\u00e9cup\u00e9ration du CSV brut\nconst csv = $json.data.trim();\nconst lines = csv.split(\"\\n\");\n\n// En-t\u00eates\nconst headers = lines[0].split(\",\");\nconst values = lines[1].split(\",\");\n\n// Construire un objet {colonne:valeur}\nlet row = {};\nheaders.forEach((h, i) => {\n  row[h.trim()] = values[i].trim();\n});\n\n// Convertir en nombres\nconst parse = (x) => (x && x !== \"N/D\") ? parseFloat(x) : null;\nconst close = parse(row.Close);\nconst open = parse(row.Open);\nconst change = (close && open) ? close - open : null;\n\n// Ici tu changes juste symbol + name + currency selon l\u2019indice\nreturn [{\n  category: \"index\",\n  symbol: \"DJI\",              // \u26a1 adapte ici\n  name: \"Dow Jones\",               // \u26a1 adapte ici\n  currency: \"USD\",              // \u26a1 USD pour indices US, EUR pour EU\n  value: close,\n  prev_close: open,\n  change_abs: change,\n  change_pct: (close && open) ? ((change / open) * 100).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                416
+            ],
+            "id": "76c73978-6f39-4bde-a64d-ef8d9d27acc9",
+            "name": "Code in JavaScript5"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=^cac&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                -144
+            ],
+            "id": "6dff4527-bbaf-45b6-a252-542688262106",
+            "name": "CAC40"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=^spx&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                0
+            ],
+            "id": "c1761630-bb9e-4805-a873-5729fd29dd5e",
+            "name": "S&P"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=^ndx&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                144
+            ],
+            "id": "de24f309-09c1-4c50-b089-efdc57c96633",
+            "name": "NDX"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=^dax&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                288
+            ],
+            "id": "804e9041-8029-4578-ab8d-472f24c7a2ec",
+            "name": "DAX"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=^dji&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                416
+            ],
+            "id": "b91c4665-5336-451d-81a2-8194c54f6c5d",
+            "name": "Dow Jones"
+        },
+        {
+            "parameters": {
+                "jsCode": "// R\u00e9cup\u00e9ration du CSV brut\nconst csv = $json.data.trim();\nconst lines = csv.split(\"\\n\");\n\n// En-t\u00eates\nconst headers = lines[0].split(\",\");\nconst values = lines[1].split(\",\");\n\n// Construire un objet {colonne:valeur}\nlet row = {};\nheaders.forEach((h, i) => {\n  row[h.trim()] = values[i].trim();\n});\n\n// Convertir en nombres\nconst parse = (x) => (x && x !== \"N/D\") ? parseFloat(x) : null;\nconst close = parse(row.Close);\nconst open = parse(row.Open);\nconst change = (close && open) ? close - open : null;\n\n// Ici tu changes juste symbol + name + currency selon l\u2019indice\nreturn [{\n  category: \"index\",\n  symbol: \"n225\",              // \u26a1 adapte ici\n  name: \"Nikkei 225\",               // \u26a1 adapte ici\n  currency: \"JPY\",              // \u26a1 USD pour indices US, EUR pour EU\n  value: close,\n  prev_close: open,\n  change_abs: change,\n  change_pct: (close && open) ? ((change / open) * 100).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                560
+            ],
+            "id": "bdca95f2-6177-4ee4-8fb3-af0101635356",
+            "name": "Code in JavaScript6"
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                1120,
+                272
+            ],
+            "id": "7abd7b5c-49eb-49eb-89ba-d14b9bc0be20",
+            "name": "Aggregate"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=^NKX&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                560
+            ],
+            "id": "f885c9f9-570a-4f9c-89f7-043bf53c3e17",
+            "name": "Nikkei 225"
+        },
+        {
+            "parameters": {
+                "numberInputs": 6
+            },
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                928,
+                208
+            ],
+            "id": "6659be5d-3d62-4f67-a5d7-b1695f4f8f9e",
+            "name": "Merge"
+        },
+        {
+            "parameters": {
+                "jsCode": "\nconst incoming = $input.all().map(i => i.json);\nconst indices = incoming.flatMap(o =>\n  Array.isArray(o?.data) ? o.data : Array.isArray(o) ? o : [o]\n);\nreturn [{ json: { indices } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1328,
+                272
+            ],
+            "id": "954d984d-b3f8-4768-9686-15a533575966",
+            "name": "Code in JavaScript7"
+        },
+        {
+            "parameters": {
+                "content": "INDICES \n",
+                "height": 80,
+                "width": 150
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "position": [
+                928,
+                96
+            ],
+            "typeVersion": 1,
+            "id": "6345fa1e-db51-49de-b0d8-bd00c20a565c",
+            "name": "Sticky Note"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=10yusy.b&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                816
+            ],
+            "id": "72c8ff55-163a-4531-8871-47fd5fb68181",
+            "name": "US 10A"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Parse le CSV 1 ligne\nconst csv = $json.data.trim();\nconst [header, line] = csv.split(\"\\n\");\nconst H = header.split(\",\");\nconst V = line.split(\",\");\nconst row = {};\nH.forEach((h,i)=> row[h.trim()] = (V[i]||\"\").trim());\n\n// Utilitaires\nconst num = (x) => (x && x !== 'N/D') ? parseFloat(x) : null;\n\n// Sur Stooq: Open/Close = taux (%)\nconst close = num(row.Close);\nconst open  = num(row.Open);\nconst change = (close!=null && open!=null) ? close - open : null;\n\nreturn [{\n  category: \"rates\",\n  symbol: \"US10Y\",\n  name: \"US 10Y Treasury\",\n  unit: \"%\",\n  value: close,\n  prev_value: open,\n  change_abs: change,\n  change_pct: (close!=null && open!=null && open!==0) ? +( (change/open)*100 ).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                816
+            ],
+            "id": "a0df7e03-7123-4e82-9df8-c23ccdb8c587",
+            "name": "Code in JavaScript"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Parse le CSV 1 ligne\nconst csv = $json.data.trim();\nconst [header, line] = csv.split(\"\\n\");\nconst H = header.split(\",\");\nconst V = line.split(\",\");\nconst row = {};\nH.forEach((h,i)=> row[h.trim()] = (V[i]||\"\").trim());\n\n// Utilitaires\nconst num = (x) => (x && x !== 'N/D') ? parseFloat(x) : null;\n\n// Sur Stooq: Open/Close = taux (%)\nconst close = num(row.Close);\nconst open  = num(row.Open);\nconst change = (close!=null && open!=null) ? close - open : null;\n\nreturn [{\n  category: \"rates\",\n  symbol: \"DE10Y\",\n  name: \"Germany 10Y (Bund)\",\n  unit: \"%\",\n  value: close,\n  prev_value: open,\n  change_abs: change,\n  change_pct: (close!=null && open!=null && open!==0) ? +( (change/open)*100 ).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                960
+            ],
+            "id": "62fa2435-4d7d-4d8f-8bf7-b618a6309976",
+            "name": "Code in JavaScript8"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Parse le CSV 1 ligne\nconst csv = $json.data.trim();\nconst [header, line] = csv.split(\"\\n\");\nconst H = header.split(\",\");\nconst V = line.split(\",\");\nconst row = {};\nH.forEach((h,i)=> row[h.trim()] = (V[i]||\"\").trim());\n\n// Utilitaires\nconst num = (x) => (x && x !== 'N/D') ? parseFloat(x) : null;\n\n// Sur Stooq: Open/Close = taux (%)\nconst close = num(row.Close);\nconst open  = num(row.Open);\nconst change = (close!=null && open!=null) ? close - open : null;\n\nreturn [{\n  category: \"rates\",\n  symbol: \"FR10Y\",\n  name: \"France 10Y (OAT)\",\n  unit: \"%\",\n  value: close,\n  prev_value: open,\n  change_abs: change,\n  change_pct: (close!=null && open!=null && open!==0) ? +( (change/open)*100 ).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                1120
+            ],
+            "id": "21454f8f-a13d-47d9-9694-27e9a76e062e",
+            "name": "Code in JavaScript9"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Parse le CSV 1 ligne\nconst csv = $json.data.trim();\nconst [header, line] = csv.split(\"\\n\");\nconst H = header.split(\",\");\nconst V = line.split(\",\");\nconst row = {};\nH.forEach((h,i)=> row[h.trim()] = (V[i]||\"\").trim());\n\n// Utilitaires\nconst num = (x) => (x && x !== 'N/D') ? parseFloat(x) : null;\n\n// Sur Stooq: Open/Close = taux (%)\nconst close = num(row.Close);\nconst open  = num(row.Open);\nconst change = (close!=null && open!=null) ? close - open : null;\n\nreturn [{\n  category: \"rates\",\n  symbol: \"UK10Y\",\n  name: \"UK 10Y (Gilt)\",\n  unit: \"%\",\n  value: close,\n  prev_value: open,\n  change_abs: change,\n  change_pct: (close!=null && open!=null && open!==0) ? +( (change/open)*100 ).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n  source: \"Stooq\",\n  source_url: \"https://stooq.com/\",\n  confidence: (close!=null ? 0.9 : 0.5)\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                1264
+            ],
+            "id": "590b33dd-8794-4105-8f85-b4c6872ae29d",
+            "name": "Code in JavaScript10"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=10ydey.b&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                960
+            ],
+            "id": "218c0a29-0975-4aa5-a30a-6023cd6eb995",
+            "name": "DE 10Y"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=10yfry.b&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                1120
+            ],
+            "id": "a95c197c-693f-4a64-b664-658944a8ba81",
+            "name": "OAT 10Y"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=10yuky.b&f=sd2t2ohlc&h&e=csv",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                1264
+            ],
+            "id": "7a1653f0-bad1-41e9-9d5b-85b548dc886f",
+            "name": "UK 10Y"
+        },
+        {
+            "parameters": {
+                "numberInputs": 4
+            },
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                976,
+                928
+            ],
+            "id": "e4031a6f-a37d-4e75-93a5-56e779d649e4",
+            "name": "Merge1"
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                1136,
+                960
+            ],
+            "id": "f9b80769-7a34-4e0b-9e38-7a91783c446e",
+            "name": "Aggregate1"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Rates wrapper\nconst incoming = $input.all().map(i => i.json);\nconst rates = incoming.flatMap(o =>\n  Array.isArray(o?.data) ? o.data : Array.isArray(o) ? o : [o]\n);\nreturn [{ json: { rates } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1328,
+                960
+            ],
+            "id": "5d7e7b96-4b3f-4555-957b-c2e43b3f7f68",
+            "name": "Code in JavaScript11"
+        },
+        {
+            "parameters": {
+                "content": "TAUX\n",
+                "height": 80,
+                "width": 150
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "position": [
+                1072,
+                832
+            ],
+            "typeVersion": 1,
+            "id": "3a0dc25b-42ef-4e28-a8ac-093395aead1c",
+            "name": "Sticky Note1"
+        },
+        {
+            "parameters": {
+                "url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                1472
+            ],
+            "id": "682a5bbf-b2ac-4559-8ed2-f5df476ba38b",
+            "name": "HTTP Request"
+        },
+        {
+            "parameters": {
+                "jsCode": "// XML complet en texte depuis le HTTP Request\nconst xml = $json.data || '';\n\n// Helper: extrait un taux \"1 EUR = rate * CCY\" en acceptant ' ou \"\nfunction pick(ccy) {\n  const re = new RegExp(\n    `<Cube\\\\s+currency=['\"]${ccy}['\"]\\\\s+rate=['\"]([0-9.]+)['\"]`,\n    'i'\n  );\n  const m = xml.match(re);\n  return m ? parseFloat(m[1]) : null;\n}\n\n// Taux ECB (base EUR)\nconst EURUSD = pick('USD'); // USD par EUR\nconst EURJPY = pick('JPY'); // JPY par EUR\nconst EURGBP = pick('GBP'); // GBP par EUR\nconst EURCNY = pick('CNY'); // CNY par EUR\n\nconst now = new Date().toISOString();\nconst out = [];\n\n// EURUSD direct\nif (EURUSD) {\n  out.push({\n    category: 'fx',\n    symbol: 'EURUSD',\n    value: EURUSD,\n    timestamp_utc: now,\n    source: 'ECB',\n    source_url: 'https://www.ecb.europa.eu/stats/eurofxref/',\n    confidence: 0.9,\n    note: '1 EUR = X USD'\n  });\n}\n\n// Paires d\u00e9riv\u00e9es (base USD)\nif (EURJPY && EURUSD) {\n  out.push({\n    category: 'fx',\n    symbol: 'USDJPY',\n    value: EURJPY / EURUSD,\n    timestamp_utc: now,\n    source: 'ECB (derived)',\n    source_url: 'https://www.ecb.europa.eu/stats/eurofxref/',\n    confidence: 0.85,\n    note: '(JPY/EUR)/(USD/EUR)'\n  });\n}\n\nif (EURGBP && EURUSD) {\n  out.push({\n    category: 'fx',\n    symbol: 'GBPUSD',\n    value: EURUSD / EURGBP,\n    timestamp_utc: now,\n    source: 'ECB (derived)',\n    source_url: 'https://www.ecb.europa.eu/stats/eurofxref/',\n    confidence: 0.85,\n    note: '(USD/EUR)/(GBP/EUR)'\n  });\n}\n\nif (EURCNY && EURUSD) {\n  out.push({\n    category: 'fx',\n    symbol: 'USDCNY',\n    value: EURCNY / EURUSD,\n    timestamp_utc: now,\n    source: 'ECB (derived)',\n    source_url: 'https://www.ecb.europa.eu/stats/eurofxref/',\n    confidence: 0.85,\n    note: '(CNY/EUR)/(USD/EUR)'\n  });\n}\n\n// (Optionnel) log rapide si rien n\u2019a match\u00e9\nif (out.length === 0) {\n  // console.log(xml.slice(0, 400)); // d\u00e9commente pour debug si besoin\n}\n\nreturn out;\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                1472
+            ],
+            "id": "e93f9304-4279-4274-bd08-dccf0532c817",
+            "name": "Code in JavaScript12",
+            "alwaysOutputData": true
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                1104,
+                1472
+            ],
+            "id": "8ebc0842-5cff-4609-93b3-79ceab43d4cd",
+            "name": "Aggregate2"
+        },
+        {
+            "parameters": {
+                "jsCode": "// FX wrapper\nconst incoming = $input.all().map(i => i.json);\nconst fx = incoming.flatMap(o =>\n  Array.isArray(o?.data) ? o.data : Array.isArray(o) ? o : [o]\n);\nreturn [{ json: { fx } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1312,
+                1472
+            ],
+            "id": "98c3bac8-0bff-49e1-9bd7-5b9526400bc2",
+            "name": "Code in JavaScript13"
+        },
+        {
+            "parameters": {
+                "content": "DEVISES",
+                "height": 80,
+                "width": 150
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                816,
+                1392
+            ],
+            "id": "b56c64cc-1db1-42dc-8411-f2fdb3e25e07",
+            "name": "Sticky Note2"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=cl.f&f=sd2t2ohlc&h&e=csv",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                1712
+            ],
+            "id": "687f38bf-09f4-4f91-b25f-bd351a4dc570",
+            "name": "WTI"
+        },
+        {
+            "parameters": {
+                "url": "https://stooq.com/q/l/?s=xauusd&f=sd2t2ohlc&h&e=csv",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                1872
+            ],
+            "id": "7ab2611e-ad69-49fc-9455-90fcc8b42a69",
+            "name": "Gold"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Parse CSV 1 ligne\nconst csv = $json.data.trim();\nconst [header, line] = csv.split(\"\\n\");\nconst H = header.split(\",\");\nconst V = line.split(\",\");\nconst row = {};\nH.forEach((h,i)=> row[h.trim()] = (V[i]||\"\").trim());\n\n// helpers\nconst num = (x) => (x && x !== 'N/D') ? parseFloat(x) : null;\n\nconst close = num(row.Close);\nconst open  = num(row.Open);\nconst change = (close!=null && open!=null) ? close - open : null;\n\n// \u26a0\ufe0f ADAPTE ICI selon la mati\u00e8re\nreturn [{\n  category: \"commodity\",\n  symbol: \"WTI\",              // \"BRENT\" / \"XAUUSD\" / \"COPPER\"\n  name: \"WTI Spot\",           // \"Brent Spot\" / \"Gold (XAUUSD)\" / \"Copper\"\n  currency: \"USD\",            // USD pour ces 4 l\u00e0\n  unit: \"bbl\",                // \"bbl\" / \"oz t\" / \"lb\" (ou \"mt\" si besoin)\n  value: close,\n  prev_value: open,\n  change_abs: (close!=null && open!=null) ? +(change.toFixed(2)) : null,\n  change_pct: (close!=null && open!=null && open!==0) ? +( (change/open)*100 ).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                1712
+            ],
+            "id": "b71a2ce0-2e08-439e-af28-a1fe1f52556d",
+            "name": "Code in JavaScript14"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Parse CSV 1 ligne\nconst csv = $json.data.trim();\nconst [header, line] = csv.split(\"\\n\");\nconst H = header.split(\",\");\nconst V = line.split(\",\");\nconst row = {};\nH.forEach((h,i)=> row[h.trim()] = (V[i]||\"\").trim());\n\n// helpers\nconst num = (x) => (x && x !== 'N/D') ? parseFloat(x) : null;\n\nconst close = num(row.Close);\nconst open  = num(row.Open);\nconst change = (close!=null && open!=null) ? close - open : null;\n\n// \u26a0\ufe0f ADAPTE ICI selon la mati\u00e8re\nreturn [{\n  category: \"commodity\",\n  symbol: \"XAUUSD\",              // \"BRENT\" / \"XAUUSD\" / \"COPPER\"\n  name: \"GOLD\",           // \"Brent Spot\" / \"Gold (XAUUSD)\" / \"Copper\"\n  currency: \"USD\",            // USD pour ces 4 l\u00e0\n  unit: \"oz t\",                // \"bbl\" / \"oz t\" / \"lb\" (ou \"mt\" si besoin)\n  value: close,\n  prev_value: open,\n  change_abs: (close!=null && open!=null) ? +(change.toFixed(2)) : null,\n  change_pct: (close!=null && open!=null && open!==0) ? +( (change/open)*100 ).toFixed(2) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                1872
+            ],
+            "id": "1ce1e5fd-9409-4a61-99c1-3f686f6083a8",
+            "name": "Code in JavaScript15"
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                1088,
+                1776
+            ],
+            "id": "ecf0beaa-4794-4535-afb3-decaa06251a4",
+            "name": "Aggregate3"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Commodities wrapper\nconst incoming = $input.all().map(i => i.json);\nconst commodities = incoming.flatMap(o =>\n  Array.isArray(o?.data) ? o.data : Array.isArray(o) ? o : [o]\n);\nreturn [{ json: { commodities } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1312,
+                1776
+            ],
+            "id": "54872261-5618-429e-b7b6-f85631b8c4ff",
+            "name": "Code in JavaScript16"
+        },
+        {
+            "parameters": {},
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                912,
+                1776
+            ],
+            "id": "905db16b-4f78-4b77-a7dc-14febc1137c1",
+            "name": "Merge2"
+        },
+        {
+            "parameters": {
+                "numberInputs": 4
+            },
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                1632,
+                832
+            ],
+            "id": "57705cd0-4954-41d4-9bd5-4dd9b52f4d2d",
+            "name": "Merge3",
+            "alwaysOutputData": false
+        },
+        {
+            "parameters": {
+                "jsCode": "const inputs = $input.all().map(i => i.json);\n\n// concat\u00e8ne si pr\u00e9sent\nconst take = (o,k) => Array.isArray(o?.[k]) ? o[k] : [];\nlet indices = [], rates = [], fx = [], commodities = [];\n\nfor (const o of inputs) {\n  indices.push(...take(o,'indices'));\n  rates.push(...take(o,'rates'));\n  fx.push(...take(o,'fx'));\n  commodities.push(...take(o,'commodities'));\n}\n\n// aplatit cas indices = [{data:[...]}]\nif (indices.length && indices.every(x => x && Array.isArray(x.data))) {\n  indices = indices.flatMap(x => x.data);\n}\n\n// borne\nindices = indices.slice(0, 24);\nrates = rates.slice(0, 12);\nfx = fx.slice(0, 12);\ncommodities = commodities.slice(0, 12);\n\n// \ud83d\udd0e debug (supprime apr\u00e8s validation)\nconst debug = {\n  sizes: {\n    indices: indices.length,\n    rates: rates.length,\n    fx: fx.length,\n    commodities: commodities.length\n  },\n  sampleFx: fx[0] || null,\n  sampleCommo: commodities[0] || null\n};\n\nreturn [{ json: { indices, rates, fx, commodities, _debug: debug } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1824,
+                864
+            ],
+            "id": "63a61e5b-d7f0-48e1-91eb-9fe154f6343f",
+            "name": "Code in JavaScript17"
+        },
+        {
+            "parameters": {
+                "content": "Commodities",
+                "height": 80,
+                "width": 150
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                768,
+                1936
+            ],
+            "id": "ce1103ed-c187-4b5b-93e8-5c4be6bbf4a9",
+            "name": "Sticky Note3"
+        },
+        {
+            "parameters": {
+                "url": "https://api.stlouisfed.org/fred/series/observations?series_id=CPALTT01USM657N&api_key=cf87ceac2f4dd339a21bda7844844de9&file_type=json",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                2240
+            ],
+            "id": "8a68d918-3c8a-4c2e-b444-133e68749ab8",
+            "name": "Us Inflation",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "jsCode": "const obs = ($json.observations || []).filter(o => o.value !== '.');\nconst last = obs.at(-1), prev = obs.at(-2);\nconst v = last ? Number(last.value) : null;\nconst p = prev ? Number(prev.value) : null;\nreturn [{\n  category: \"macro\",\n  metric: \"inflation_yoy\",\n  country: \"US\",\n  symbol: \"US_CPI_YoY\",\n  name: \"US CPI YoY\",\n  period: last?.date || null,\n  unit: \"%YoY\",\n  value: v,\n  prev_value: p,\n  change_abs: (v!=null&&p!=null)? Number((v-p).toFixed(2)) : null,\n  change_pct: (v!=null&&p)? Number((((v-p)/p)*100).toFixed(2)) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                544,
+                2240
+            ],
+            "id": "f8111eeb-e4b3-4336-899c-a8b0eb2a9277",
+            "name": "Code in JavaScript18",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "jsCode": "const obs = ($json.observations || []).filter(o => o.value !== '.');\nconst last = obs.at(-1), prev = obs.at(-2);\nconst v = last ? Number(last.value) : null;\nconst p = prev ? Number(prev.value) : null;\nreturn [{\n  category:\"macro\",\n  metric:\"unemployment_rate\",\n  country:\"US\",\n  symbol:\"US_UNRATE\",\n  name:\"US Unemployment Rate\",\n  period:last?.date || null,\n  unit:\"%\",\n  value:v,\n  prev_value:p,\n  change_abs:(v!=null&&p!=null)? Number((v-p).toFixed(2)) : null,\n  change_pct:(v!=null&&p)? Number((((v-p)/p)*100).toFixed(2)) : null,\n  timestamp_utc:new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                544,
+                2416
+            ],
+            "id": "d55780d9-3366-4945-b34d-1ac668b3b376",
+            "name": "Code in JavaScript19",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "url": "https://api.stlouisfed.org/fred/series/observations?series_id=UNRATE&api_key=cf87ceac2f4dd339a21bda7844844de9&file_type=json",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                2416
+            ],
+            "id": "ceb85275-0b95-4749-b7d4-adb849714ba9",
+            "name": "Ch\u00f4mage US",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "url": "https://api.stlouisfed.org/fred/series/observations?series_id=FRACPIALLMINMEI&api_key=cf87ceac2f4dd339a21bda7844844de9&file_type=json",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                2576
+            ],
+            "id": "7b464e2b-af24-4456-9cb6-131056ddca99",
+            "name": "Inflation France",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "url": "https://api.stlouisfed.org/fred/series/observations?series_id=LRHUTTTTFRM156S&api_key=cf87ceac2f4dd339a21bda7844844de9&file_type=json",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                2736
+            ],
+            "id": "aef943d8-380a-4c20-bef3-071bfba82565",
+            "name": "Ch\u00f4mage France",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "jsCode": "const obs = ($json.observations || []).filter(o => o.value !== '.');\nconst last = obs.at(-1), prev = obs.at(-2);\nconst v = last ? Number(last.value) : null;\nconst p = prev ? Number(prev.value) : null;\n\nreturn [{\n  category: \"macro\",\n  metric: \"inflation_yoy\",\n  country: \"FR\",\n  symbol: \"FR_CPI_YoY\",\n  name: \"France CPI YoY\",\n  period: last?.date || null,\n  unit: \"%YoY\",\n  value: v,\n  prev_value: p,\n  change_abs: (v!=null&&p!=null)? Number((v-p).toFixed(2)) : null,\n  change_pct: (v!=null&&p)? Number((((v-p)/p)*100).toFixed(2)) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                544,
+                2576
+            ],
+            "id": "41007025-f741-45a5-b8c7-0768878a6d44",
+            "name": "Code in JavaScript20",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "jsCode": "const obs = ($json.observations || []).filter(o => o.value !== '.');\nconst last = obs.at(-1), prev = obs.at(-2);\nconst v = last ? Number(last.value) : null;\nconst p = prev ? Number(prev.value) : null;\n\nreturn [{\n  category: \"macro\",\n  metric: $json.realtime_start ? \"unemployment_rate\" : \"inflation_yoy\", // indicatif\n  country: \"FR\",\n  symbol: $json.realtime_start ? \"FR_UNRATE\" : \"FR_CPI_YoY\",\n  name: $json.realtime_start ? \"France Unemployment Rate (Harmonised)\" : \"France CPI YoY\",\n  period: last?.date || null,\n  unit: $json.realtime_start ? \"%\" : \"%YoY\",\n  value: v,\n  prev_value: p,\n  change_abs: (v!=null&&p!=null) ? Number((v-p).toFixed(2)) : null,\n  change_pct: (v!=null&&p) ? Number(((v-p)/p*100).toFixed(2)) : null,\n  timestamp_utc: new Date().toISOString(),\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                544,
+                2736
+            ],
+            "id": "f5a4e8e0-c389-40c1-bf40-154c59b0f3c0",
+            "name": "Code in JavaScript21",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "numberInputs": 4
+            },
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                944,
+                2384
+            ],
+            "id": "7058d63b-87e4-4c91-82e4-a5d26d33be0f",
+            "name": "Merge4",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                1200,
+                2384
+            ],
+            "id": "a74f7e9f-0839-450c-a2b2-6e7226ff6187",
+            "name": "Aggregate4",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "jsCode": "const macro = $json.macro || [];\nconst now = new Date();\nconst iso = now.toISOString().slice(0,10);\nconst rfc = now.toUTCString();\n\nconst rss = `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\">\n  <channel>\n    <title>Morning Meeting \u2013 Macro (US & FR)</title>\n    <link>https://example.com/morning-meeting</link>\n    <description>Inflation & ch\u00f4mage \u2013 US et France</description>\n    <language>fr-fr</language>\n    <lastBuildDate>${rfc}</lastBuildDate>\n    <item>\n      <title>Macro - ${iso}</title>\n      <guid>macro-${Date.now()}</guid>\n      <pubDate>${rfc}</pubDate>\n      <content:encoded><![CDATA[\n${JSON.stringify(macro, null, 2)}\n      ]]></content:encoded>\n      <source url=\"https://fred.stlouisfed.org/\">FRED (OECD/Eurostat)</source>\n    </item>\n  </channel>\n</rss>`;\n\nreturn [{ json: { rss } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1408,
+                2384
+            ],
+            "id": "c49a9cb4-9fba-407e-9243-834b6efc1ab3",
+            "name": "Code in JavaScript22",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "content": "Macro\u00e9conomie",
+                "height": 80,
+                "width": 150
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                800,
+                2240
+            ],
+            "id": "0a0c2b45-4e3f-464e-bb7a-e451142d6196",
+            "name": "Sticky Note4",
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "sendTo": "spmorningmeeting@gmail.com",
+                "subject": "={{ $json.subject }}",
+                "message": "={{ $json.html }}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.gmail",
+            "typeVersion": 2.1,
+            "position": [
+                7856,
+                2672
+            ],
+            "id": "d6d0bcfd-89e9-4776-b963-a18cecee2c56",
+            "name": "Gmail Send",
+            "webhookId": "fdc57c8c-bb80-40e9-80b6-e01a2ac162ae"
+        },
+        {
+            "parameters": {
+                "numberInputs": 3
+            },
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                5376,
+                2192
+            ],
+            "id": "e4cb796c-e3bf-4550-b51c-d60a8e2ed0f5",
+            "name": "Merge6"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Input attendu: { indices:[], rates:[], fx:[], commodities:[], _debug? }\nconst j = $json;\n\nconst num = v => (typeof v===\"number\" ? v : Number(String(v ?? \"\").replace(\",\", \".\")));\nconst pct = v => Number.isFinite(v) ? (v>=0?`+${v.toFixed(2)}%`:`${v.toFixed(2)}%`) : \"\u2014\";\nconst lvl = (v,d=2)=> Number.isFinite(v) ? v.toFixed(d) : \"\u2014\";\nconst arr = a => Array.isArray(a) ? a : [];\nconst abs = Math.abs;\n\n// ---- helpers alias-tol\u00e9rants\nconst findIndex = (...aliases) => {\n  const A = aliases.map(s=>s.toUpperCase());\n  return arr(j.indices).find(x => {\n    const sym = String(x.symbol||\"\").toUpperCase();\n    const name= String(x.name||\"\").toUpperCase();\n    return A.some(a => sym===a || name.includes(a));\n  });\n};\nconst findFx   = (...aliases) => {\n  const A = aliases.map(s=>s.toUpperCase().replace(\"/\",\"\"));\n  return arr(j.fx).find(x => A.includes(String(x.symbol||\"\").toUpperCase()));\n};\nconst findCom  = (...aliases) => {\n  const A = aliases.map(s=>s.toUpperCase());\n  return arr(j.commodities).find(x => {\n    const s = String(x.symbol||\"\").toUpperCase();\n    const n = String(x.name||\"\").toUpperCase();\n    return A.some(a => s.includes(a) || n.includes(a));\n  });\n};\n\n// ---- incontournables (forc\u00e9s si pr\u00e9sents)\nconst CAC    = findIndex(\"CAC\",\"CAC 40\",\"PX1\");\nconst SPX    = findIndex(\"SPX\",\"S&P 500\",\"SP 500\");\nconst EURUSD = findFx(\"EURUSD\",\"EUR/USD\");\nconst WTI    = findCom(\"WTI\");\nconst GOLD   = findCom(\"XAUUSD\",\"GOLD\",\"XAU\");\n\n// ---- movers indices |\u0394%| \u2265 0.8 (hors CAC/SPX)\nconst movers = arr(j.indices)\n  .filter(x => ![\"CAC\",\"SPX\"].includes(String(x.symbol||\"\").toUpperCase()))\n  .map(x => ({...x, _ch: num(x.change_pct ?? x.pct ?? x.changePercent)}))\n  .filter(x => Number.isFinite(x._ch) && abs(x._ch) >= 0.8)\n  .sort((a,b)=>abs(b._ch)-abs(a._ch))\n  .slice(0,2);\n\n// ---- taux (\u0394 \u2265 4 bps OU US > 4%)\nconst selRates = arr(j.rates).filter(x=>{\n  const ch = num(x.change_abs);\n  const v  = num(x.value);\n  const isUS = String(x.symbol||\"\").toUpperCase().includes(\"US\");\n  return (abs(ch) >= 0.04) || (isUS && v > 4);\n}).slice(0,2);\n\n// ---- FX additionnels\nconst fxAdd = arr(j.fx).filter(x=>{\n  const sym = String(x.symbol||\"\").toUpperCase();\n  const ch  = num(x.change_pct);\n  const v   = num(x.value);\n  // R\u00e8gles: USDJPY si |\u0394|>=0.5% OU \"niveau rond\" ~150; tu peux \u00e9tendre \u00e0 GBPUSD/USDCNY si tu veux\n  if (sym === \"USDJPY\") {\n    const round150 = Number.isFinite(v) && Math.abs(v - 150) < 0.2; // tol\u00e9rance 0.2\n    return (Number.isFinite(ch) && abs(ch) >= 0.5) || round150;\n  }\n  return false;\n});\n\n// ---- Commodities additionnelles (Brent/Copper \u0394\u22651%)\nconst comAdd = arr(j.commodities).filter(x=>{\n  const s = String(x.symbol||\"\").toUpperCase();\n  const ch = num(x.change_pct);\n  return (s.includes(\"BRENT\") || s.includes(\"COPPER\")) && Number.isFinite(ch) && abs(ch)>=1;\n});\n\n// ---- curated\nconst curated = {\n  indices: [CAC, SPX, ...movers].filter(Boolean),\n  rates: selRates,\n  fx: [EURUSD, ...fxAdd].filter(Boolean),\n  commodities: [WTI, GOLD, ...comAdd].filter(Boolean)\n};\n\n// ---- facts\nconst facts = [];\nfor (const x of curated.indices)      facts.push(`${x.name||x.symbol}: ${lvl(num(x.value))} (${pct(num(x.change_pct ?? x.pct ?? x.changePercent))})`);\nfor (const r of curated.rates)        facts.push(`${r.name||r.symbol}: ${lvl(num(r.value),3)}%`);\nfor (const x of curated.fx)           facts.push(`${x.symbol.slice(0,3)}/${x.symbol.slice(3)}: ${lvl(num(x.value),4)}`);\nfor (const c of curated.commodities)  facts.push(`${c.name||c.symbol}: ${lvl(num(c.value),2)} USD`);\n\nreturn [{ json: { curated, facts } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2032,
+                864
+            ],
+            "id": "d45dd2ae-51c4-4098-81f4-7f4d5e235b61",
+            "name": "Code in JavaScript31"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                688,
+                1248
+            ],
+            "id": "9e490896-5779-4d1e-9350-73b7b3dfbc74",
+            "name": "Code in JavaScript36"
+        },
+        {
+            "parameters": {
+                "url": "=https://live.euronext.com/en/ajax/getStockIndexCompositionBlockContent/FR0003500008-XPAR",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "User-Agent",
+                            "value": "=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+                        },
+                        {
+                            "name": "Accept",
+                            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
+                        },
+                        {
+                            "name": "Accept-Language",
+                            "value": "fr-FR,fr;q=0.9,en;q=0.8"
+                        },
+                        {
+                            "name": "Referer",
+                            "value": "https://www.boursier.com/"
+                        },
+                        {
+                            "name": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "name": "Upgrade-Insecure-Requests",
+                            "value": "1"
+                        },
+                        {
+                            "name": "cookie",
+                            "value": "ar_debug=1; receive-cookie-deprecation=1; DSID=AEhM4MfT4op6GdVCufdF2kZe_fzUVhOSDXzHYzgHvnyoIVvGj1bEDttNIwE8IJxz4mY5cmfcHqVq-eu7OTINKbrePV_tDLB2oet2Y8FzFzVpmGr-prJeX91Lq2Tepxe09plyqqHyu4-pSu7BRT4K182dhX7TCLLxaArhFQiwPIq7-lkKQZGiF_U-_U_xOYEjq7DqipjEnR6nHx9f6qGxmv9E9Ebt7xutLKh1ctDp_nYQJ7_SPodvN40kwQuN8zq9g4-vNpIiiuJAVjdj1Vt-O4K9rCe8JTxxtgeoH1nDZCvKeASwDpXNRNwHWYcNol1iCBzxmQAYAf47A8b4OrJiNTY2v_pPyBowag; IDE=AHWqTUlPTjQ5DUlsScmODaCu0l3B9uUAfJveylKkJSzZnuXO5sW1FcJo5SUrtaOeo6s"
+                        }
+                    ]
+                },
+                "options": {
+                    "response": {
+                        "response": {
+                            "fullResponse": true,
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                3024
+            ],
+            "id": "7ecee035-a338-47cf-bd98-6230b2139b4e",
+            "name": "HTTP Request3"
+        },
+        {
+            "parameters": {
+                "jsCode": "// ---- R\u00e9cup HTML du node HTTP (data ou body selon n8n)\nconst html = $json.data ?? $json.body ?? '';\nif (!html || typeof html !== 'string') {\n  throw new Error('HTML manquant : v\u00e9rifie que HTTP Request renvoie du texte (Response=Text) et le champ \"data\" (ou \"body\").');\n}\n\n// ---- Helpers robustes\nfunction strip(s=''){ return s.replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/\\s+/g,' ').trim(); }\nfunction numEU(s){\n  if (s == null) return null;\n  let t = String(s).replace(/[^\\d.,\\-]/g,'').trim();\n  // \",\" et \".\" pr\u00e9sents \u2192 on suppose \",\"=milliers, \".\"=d\u00e9cimal (ex: 2,139.00)\n  if (t.includes(',') && t.includes('.')) {\n    t = t.replace(/,/g, '');\n  } else if (t.includes(',')) {\n    // sinon \",\" = d\u00e9cimal (ex: 40,59)\n    t = t.replace(/,/g, '.');\n  }\n  const v = parseFloat(t);\n  return Number.isFinite(v) ? v : null;\n}\nfunction pct(s){\n  if (s == null) return null;\n  const v = parseFloat(String(s).replace('%','').replace(',','.'));\n  return Number.isFinite(v) ? v : null;\n}\nfunction mcap(s){\n  if (s == null) return null; // \"270,877M\"\n  const up = String(s).toUpperCase().replace(/\\s/g,'');\n  const base = numEU(up);\n  if (!Number.isFinite(base)) return null;\n  if (up.endsWith('B')) return base * 1e9;\n  if (up.endsWith('M')) return base * 1e6;\n  if (up.endsWith('K')) return base * 1e3;\n  return base;\n}\nconst micSuffix = { XPAR:'PA', XAMS:'AS', XLIS:'LS', XBRU:'BR', XMIL:'MI', XETR:'DE', XLON:'L' };\n\n// ---- Isole le tbody du tableau \"index composition\"\nconst tbody = (html.match(/<tbody[^>]*>([\\s\\S]*?)<\\/tbody>/i) || [,''])[1];\nif (!tbody) throw new Error('Impossible de trouver <tbody>. La page a peut-\u00eatre chang\u00e9.');\n\n// ---- Parcours des lignes\nconst rows = [...tbody.matchAll(/<tr[^>]*>([\\s\\S]*?)<\\/tr>/gi)];\nconst out = [];\n\nfor (const m of rows){\n  const tr = m[1];\n  const tds = [...tr.matchAll(/<t[dh][^>]*>([\\s\\S]*?)<\\/t[dh]>/gi)].map(x => strip(x[1]));\n  if (tds.length < 12) continue;\n\n  const name = tds[0] || null;\n  const isin = tds[1] || null;\n  const rawSym = tds[2] || null;\n  const mic = tds[3] || null;\n  const market = tds[4] || null;\n  const bidask = tds[5] || null;\n\n  // \"EUR40.59\" ou \"2,139.00\"\n  const lastTxt = (tds[6] || '').replace(/^EUR\\s*/i,'').replace(/^EUR/i,'');\n  const changePct = pct(tds[7]);\n  const dt = tds[8] || null;\n  const turnoverTxt = tds[9] || null;\n  const mcapTxt = tds[10] || null;\n  const ytdTxt = tds[11] || null;\n\n  const last = numEU(lastTxt);\n\n  // Pas de recalcul impos\u00e9, mais on peut d\u00e9duire un prev close si le % est dispo (utile pour contr\u00f4le)\n  const prev = (last != null && changePct != null) ? +( last / (1 + changePct/100) ).toFixed(2) : null;\n  const changeAbs = (last != null && prev != null) ? +( last - prev ).toFixed(2) : null;\n\n  const suffix = micSuffix[mic] || null;\n  const fullSymbol = (rawSym && suffix) ? `${rawSym}.${suffix}` : (rawSym || null);\n\n  out.push({\n    json: {\n      category: \"equity\",\n      exchange_mic: mic,\n      symbol: fullSymbol,        // ex: BNP.PA\n      raw_symbol: rawSym,        // ex: BNP\n      name,\n      isin,\n      market,\n      currency: \"EUR\",\n      bidask,\n      value: last,               // 40.59 (et pas 4059)\n      prev_close: prev,          // reconstruit si % dispo (sinon null)\n      change_abs: changeAbs,     // calcul\u00e9 \u2014 GARD\u00c9 mais secondaire\n      change_pct: changePct,     // PRIORIT\u00c9 pour les classements\n      ytd_pct: pct(ytdTxt),\n      turnover: numEU(turnoverTxt), // 5,205,249.53 \u2192 5205249.53\n      market_cap: mcap(mcapTxt),    // 270,877M \u2192 270877000000\n      datetime_local: dt || null,   // ex: \"16:23 CEST\"\n      timestamp_utc: new Date().toISOString(),\n      source: \"Euronext (page publique)\",\n      source_url: \"https://live.euronext.com/en/markets/paris/equities\",\n      confidence: last != null ? 0.75 : 0.5\n    }\n  });\n}\n\nreturn out;\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                3024
+            ],
+            "id": "88b0f714-ab0b-4a4a-aab7-55aa34b5dc33",
+            "name": "Code in JavaScript34"
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "destinationFieldName": "equities_fr",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                768,
+                3024
+            ],
+            "id": "d538974a-6bc1-48f4-9a75-11dfbb7fdbce",
+            "name": "Aggregate7"
+        },
+        {
+            "parameters": {
+                "jsCode": "// R\u00e9cup\u00e8re la liste des actions FR depuis l'Aggregate si pr\u00e9sent,\n// sinon retombe sur les items en entr\u00e9e.\nlet list = [];\nif (Array.isArray($json.equities_fr)) {\n  list = $json.equities_fr;\n} else {\n  // Fallback: collecte depuis tous les items entrants\n  const all = $input.all().map(i => i.json);\n  // Si certains items contiennent d\u00e9j\u00e0 un array equities_fr\n  const nested = all.flatMap(x => Array.isArray(x.equities_fr) ? x.equities_fr : [x]);\n  list = nested;\n}\n\n// Normalise change_pct -> number\nfunction toPct(x) {\n  if (x == null) return null;\n  if (typeof x === 'number' && isFinite(x)) return x;\n  const v = parseFloat(String(x).replace('%','').replace(',','.'));\n  return Number.isFinite(v) ? v : null;\n}\n\nconst arr = list\n  .map(o => ({ ...o, change_pct: toPct(o.change_pct) }))\n  .filter(o => o && typeof o.change_pct === 'number' && isFinite(o.change_pct));\n\n// Si rien \u00e0 classer, on renvoie un conteneur vide (mais bien form\u00e9)\nif (!arr.length) {\n  return [{ json: { news: { movers_fr: [] }, note: \"Aucune action avec change_pct num\u00e9rique trouv\u00e9e.\" } }];\n}\n\n// Top 5\nconst top5 = [...arr].sort((a,b) => b.change_pct - a.change_pct).slice(0,5)\n  .map(x => ({ ...x, side: 'gainer' }));\n\n// Flop 5\nconst flop5 = [...arr].sort((a,b) => a.change_pct - b.change_pct).slice(0,5)\n  .map(x => ({ ...x, side: 'loser' }));\n\nreturn [{ json: { news: { movers_fr: [...top5, ...flop5] } } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                976,
+                3024
+            ],
+            "id": "bea3b3c0-e94c-4fee-b618-1c62cc8c9f06",
+            "name": "Code in JavaScript37",
+            "alwaysOutputData": false
+        },
+        {
+            "parameters": {
+                "content": "TOP OU FLOP DU JOUR",
+                "height": 80,
+                "width": 150
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                640,
+                2912
+            ],
+            "id": "00504fc4-422e-482e-8c40-268248eee118",
+            "name": "Sticky Note7"
+        },
+        {
+            "parameters": {
+                "content": "Calendrier \u00e9conomique",
+                "height": 80,
+                "width": 192
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                576,
+                3328
+            ],
+            "id": "39a43d8b-5db1-4471-b6a2-919cc6ebd3a2",
+            "name": "Sticky Note8"
+        },
+        {
+            "parameters": {
+                "url": "=https://www.slickcharts.com/sp500#google_vignette",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "User-Agent",
+                            "value": "=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+                        },
+                        {
+                            "name": "Accept",
+                            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
+                        },
+                        {
+                            "name": "Accept-Language",
+                            "value": "fr-FR,fr;q=0.9,en;q=0.8"
+                        },
+                        {
+                            "name": "Referer",
+                            "value": "https://www.boursier.com/"
+                        },
+                        {
+                            "name": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "name": "Upgrade-Insecure-Requests",
+                            "value": "1"
+                        },
+                        {
+                            "name": "cookie",
+                            "value": "ar_debug=1; receive-cookie-deprecation=1; DSID=AEhM4MfT4op6GdVCufdF2kZe_fzUVhOSDXzHYzgHvnyoIVvGj1bEDttNIwE8IJxz4mY5cmfcHqVq-eu7OTINKbrePV_tDLB2oet2Y8FzFzVpmGr-prJeX91Lq2Tepxe09plyqqHyu4-pSu7BRT4K182dhX7TCLLxaArhFQiwPIq7-lkKQZGiF_U-_U_xOYEjq7DqipjEnR6nHx9f6qGxmv9E9Ebt7xutLKh1ctDp_nYQJ7_SPodvN40kwQuN8zq9g4-vNpIiiuJAVjdj1Vt-O4K9rCe8JTxxtgeoH1nDZCvKeASwDpXNRNwHWYcNol1iCBzxmQAYAf47A8b4OrJiNTY2v_pPyBowag; IDE=AHWqTUlPTjQ5DUlsScmODaCu0l3B9uUAfJveylKkJSzZnuXO5sW1FcJo5SUrtaOeo6s"
+                        }
+                    ]
+                },
+                "options": {
+                    "response": {
+                        "response": {
+                            "fullResponse": true,
+                            "responseFormat": "text"
+                        }
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                352,
+                3184
+            ],
+            "id": "b4832a8a-5a2d-4863-9d4f-fd027e074106",
+            "name": "HTTP Request6"
+        },
+        {
+            "parameters": {
+                "jsCode": "// HTTP Request -> responseFormat: \"string\"\n// HTML brut dispo en items[0].json.data (ou .body selon ta config)\nconst BASE = 'https://www.slickcharts.com';\nconst html =\n  (items[0]?.json?.data || items[0]?.json?.body || '').toString();\n\n// R\u00e9cup\u00e9rer le <tbody> du tableau principal\nconst tbody = (html.match(/<tbody[^>]*>([\\s\\S]*?)<\\/tbody>/i) || [,''])[1];\nif (!tbody) {\n  return [{ json: { error: \"tbody introuvable dans le HTML\" } }];\n}\n\n// Helpers\nconst decode = (s) => s\n  .replace(/&nbsp;/g, ' ')\n  .replace(/&amp;/g, '&')\n  .replace(/&lt;/g, '<')\n  .replace(/&gt;/g, '>')\n  .replace(/&quot;/g, '\"')\n  .replace(/&#39;/g, \"'\")\n  .replace(/&#x([0-9a-fA-F]+);/g, (_, h) => String.fromCharCode(parseInt(h, 16)))\n  .replace(/&#(\\d+);/g,  (_, d) => String.fromCharCode(parseInt(d, 10)));\n\nconst strip = (s) => decode(String(s).replace(/<[^>]*>/g, ' ')).replace(/\\s+/g, ' ').trim();\n\n// Remplacer new URL(...) par une r\u00e9solution simple\nconst abs = (href) => {\n  if (!href || href.startsWith('#')) return undefined;\n  if (/^https?:/i.test(href)) return href.split('#')[0];\n  if (href.startsWith('/')) return (BASE + href).split('#')[0];\n  return (BASE + '/' + href).replace(/([^:]\\/)\\/+/g, '$1').split('#')[0];\n};\n\nconst num = (s) => {\n  const m = String(strip(s)).match(/[-+]?\\d[\\d,]*\\.?\\d*/);\n  return m ? parseFloat(m[0].replace(/,/g, '')) : undefined;\n};\n\n// D\u00e9couper les lignes <tr>\nconst rows = [...tbody.matchAll(/<tr[^>]*>([\\s\\S]*?)<\\/tr>/gi)];\nconst out = [];\n\nfor (const r of rows) {\n  const rowHtml = r[1];\n  const tds = [...rowHtml.matchAll(/<td[^>]*>([\\s\\S]*?)<\\/td>/gi)].map(m => m[1]);\n  if (tds.length < 7) continue;\n\n  const rank = parseInt(strip(tds[0]), 10);\n\n  const aCompany = /<a[^>]*href=\"([^\"]+)\"[^>]*>([\\s\\S]*?)<\\/a>/i.exec(tds[1]);\n  const aSymbol  = /<a[^>]*href=\"([^\"]+)\"[^>]*>([\\s\\S]*?)<\\/a>/i.exec(tds[2]);\n  if (!aCompany || !aSymbol) continue;\n\n  const company    = strip(aCompany[2]);\n  const companyUrl = abs(aCompany[1]);\n  const symbol     = strip(aSymbol[2]);\n  const symbolUrl  = abs(aSymbol[1]);\n\n  const weight    = num(tds[3]);  // ex: \"7.52%\"\n  const price     = num(tds[4]);  // ex: \"187.62\"\n  const change    = num(tds[5]);  // ex: \"-1.27\"\n  const changePct = num(tds[6]);  // ex: \"(-0.67%)\" -> -0.67\n  const direction = (tds[4].match(/\\/img\\/(up|down)\\.gif/) || [])[1];\n\n  out.push({\n    json: {\n      rank, company, symbol,\n      weight, price, change, changePct, direction,\n    }\n  });\n}\n\nreturn out.length ? out : [{ json: { note: \"Aucune ligne pars\u00e9e.\" } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                560,
+                3184
+            ],
+            "id": "3289ee10-d353-4651-8398-500b8923de3b",
+            "name": "Code in JavaScript39"
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                768,
+                3184
+            ],
+            "id": "08ed0c5e-4fa5-4700-abe8-13285ee0c3c5",
+            "name": "Aggregate8"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Prend en charge :\n// - plusieurs items (1 par ligne)\n// - ou 1 seul item agr\u00e9g\u00e9 avec un tableau (components / rows / data / autre)\n\nfunction unwrapRows(items) {\n  if (items.length === 1 && items[0]?.json) {\n    const j = items[0].json;\n    if (Array.isArray(j.components)) return j.components;\n    if (Array.isArray(j.rows))       return j.rows;\n    if (Array.isArray(j.data))       return j.data;\n    // trouve le 1er tableau d'objets s'il a un autre nom\n    for (const k of Object.keys(j)) {\n      if (Array.isArray(j[k]) && j[k].length && typeof j[k][0] === 'object') return j[k];\n    }\n  }\n  return items.map(i => i.json);\n}\n\nconst rows = unwrapRows(items).filter(Boolean);\n\n// normalise nombres et calcule changePct si absent (\u00e0 partir de price & change)\nfunction normalize(r) {\n  const price  = Number(r.price);\n  const change = Number(r.change);\n  let changePct = (r.changePct !== undefined) ? Number(r.changePct) : undefined;\n\n  if (!Number.isFinite(changePct)) {\n    const prev = (Number.isFinite(price) && Number.isFinite(change)) ? (price - change) : undefined;\n    changePct = (Number.isFinite(prev) && prev !== 0) ? (change / prev * 100) : undefined;\n  }\n  return { ...r, price, change, changePct };\n}\n\nconst clean = rows.map(normalize).filter(r => Number.isFinite(r.changePct));\n\n// top 3 hausses et baisses en % (desc & asc)\nconst gainers = [...clean].sort((a,b) => b.changePct - a.changePct).slice(0, 3);\nconst losers  = [...clean].sort((a,b) => a.changePct - b.changePct).slice(0, 3);\n\n// format de sortie lisible\nconst fmt = r => ({\n  rank: r.rank,\n  company: r.company,\n  symbol: r.symbol,\n  changePct: Number(r.changePct.toFixed(2)),\n  change: Number.isFinite(r.change) ? Number(r.change.toFixed(2)) : undefined,\n  price: Number.isFinite(r.price) ? Number(r.price.toFixed(2)) : undefined,\n  url: r.companyUrl || r.symbolUrl\n});\n\nreturn [{\n  json: {\n    count: clean.length,\n    top_gainers: gainers.map(fmt),\n    top_losers: losers.map(fmt)\n  }\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                976,
+                3184
+            ],
+            "id": "aaa3168b-8d57-45e4-8319-a48182a8d367",
+            "name": "Code in JavaScript40"
+        },
+        {
+            "parameters": {},
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                1200,
+                3072
+            ],
+            "id": "abe9c3d3-1a9e-4cc6-bb5a-9d0bf4dc77c9",
+            "name": "Merge8"
+        },
+        {
+            "parameters": {
+                "jsCode": "// n8n Code node \u2014 Run once for all items\nconst LIMIT = 3;\n\n/* --------- helpers --------- */\nfunction asNum(v){\n  if (typeof v === 'number') return v;\n  if (v == null) return NaN;\n  const s = String(v).trim().replace(/[%\\s]/g,'').replace(',', '.');\n  const m = s.match(/-?\\d+(\\.\\d+)?/);\n  return m ? Number(m[0]) : NaN;\n}\n\nfunction pctFromRaw(r){\n  const direct = asNum(r.change_pct ?? r.percent_change ?? r.changePercent);\n  if (Number.isFinite(direct)) return direct;\n  const abs  = asNum(r.change_abs ?? r.change ?? r.delta ?? r.chg);\n  const prev = asNum(r.prev_close ?? r.prevClose ?? r.previous);\n  const last = asNum(r.value ?? r.price ?? r.last);\n  const denom = Number.isFinite(prev) ? prev : (Number.isFinite(last) ? last - abs : NaN);\n  if (Number.isFinite(abs) && Number.isFinite(denom) && denom !== 0) return (abs/denom)*100;\n  return NaN;\n}\n\nfunction looksNormalized(o){\n  return o && typeof o === 'object' && 'changePct' in o && Number.isFinite(asNum(o.changePct));\n}\nfunction looksRaw(o){\n  return o && typeof o === 'object' && (\n    'change_pct' in o || 'prev_close' in o || 'change_abs' in o\n  );\n}\n\nfunction walkArrays(node, out = []){\n  if (Array.isArray(node)){\n    if (node.length && typeof node[0] === 'object') out.push(node);\n    for (const el of node) walkArrays(el, out);\n  } else if (node && typeof node === 'object'){\n    for (const v of Object.values(node)) walkArrays(v, out);\n  }\n  return out;\n}\n\nfunction symFromAny(r){\n  let s = r.symbol ?? r.raw_symbol ?? r.ticker ?? '';\n  if (!s) {\n    const u = r.url ?? r.href ?? r.link ?? r.path;\n    if (u) {\n      const m = String(u).match(/\\/symbol\\/([A-Za-z0-9.\\-]+)/);\n      if (m) s = m[1];\n    }\n  }\n  return (s || '').toString().trim().toUpperCase();\n}\n\nfunction cleanName(n){\n  if (!n) return '';\n  return String(n).replace(/\\s+/g,' ').replace(/\\u00a0/g,' ').trim();\n}\n\nfunction bestNameFromRecord(r){\n  const candidates = [\n    r.name, r.company, r.companyName, r.longName, r.securityName,\n    r.instrumentName, r.displayName, r.company_full, r.company_full_name, r.Company\n  ].map(cleanName).filter(Boolean);\n  // garder la plus longue cha\u00eene non \u00e9gale au symbole (\u00e9vite \"AAPL\" comme nom)\n  return (sym) => candidates\n    .filter(x => x.toUpperCase() !== sym)\n    .sort((a,b) => b.length - a.length)[0] || '';\n}\n\n/* --------- 1) collecter toutes les listes --------- */\nconst allArrays = [];\nfor (const it of items) walkArrays(it.json ?? it, allArrays);\n\n/* --------- 2) Construire un dictionnaire symbole -> nom complet --------- */\nconst symToFullName = new Map();\nfor (const arr of allArrays){\n  if (!arr.length || typeof arr[0] !== 'object') continue;\n  for (const r of arr){\n    const sym = symFromAny(r);\n    if (!sym) continue;\n    const pick = bestNameFromRecord(r)(sym);\n    if (!pick) continue;\n    const current = symToFullName.get(sym) || '';\n    // on garde le nom le plus long (souvent \"Alphabet Inc. (Class A)\" vs \"Alphabet\")\n    if (pick.length > current.length) symToFullName.set(sym, pick);\n  }\n}\n\n/* --------- 3) Normaliser toutes les lignes avec nom enrichi --------- */\nconst rows = [];\nfor (const arr of allArrays){\n  if (!arr.length || typeof arr[0] !== 'object') continue;\n\n  if (looksNormalized(arr[0])) {\n    for (const r of arr){\n      const cp = asNum(r.changePct);\n      if (!Number.isFinite(cp)) continue;\n      const sym = symFromAny(r);\n      let nm = bestNameFromRecord(r)(sym) || symToFullName.get(sym) || r.name || r.company || sym;\n      nm = cleanName(nm);\n      rows.push({\n        source: r.index ?? r.list ?? 'norm',\n        symbol: sym,\n        name: nm,\n        changePct: Number(cp.toFixed(2))\n      });\n    }\n  } else if (looksRaw(arr[0])) {\n    for (const r of arr){\n      const cp = pctFromRaw(r);\n      if (!Number.isFinite(cp)) continue;\n      const sym = symFromAny(r);\n      let nm = bestNameFromRecord(r)(sym) || symToFullName.get(sym) || r.name || r.company || sym;\n      nm = cleanName(nm);\n      rows.push({\n        source: r.exchange_mic ?? r.market ?? r.list ?? 'raw',\n        symbol: sym,\n        name: nm,\n        changePct: Number(cp.toFixed(2))\n      });\n    }\n  }\n}\n\n/* --------- 4) D\u00e9doublonnage & TOPS --------- */\nconst bySym = new Map();\nfor (const r of rows){\n  const key = r.symbol || r.name;\n  if (!key) continue;\n  const cur = bySym.get(key);\n  if (!cur || Math.abs(r.changePct) > Math.abs(cur.changePct)) bySym.set(key, r);\n}\nconst merged = [...bySym.values()];\n\nconst winners = merged.filter(x => x.changePct > 0)\n  .sort((a,b) => b.changePct - a.changePct)\n  .slice(0, LIMIT);\n\nconst losers = merged.filter(x => x.changePct < 0)\n  .sort((a,b) => a.changePct - b.changePct)\n  .slice(0, LIMIT);\n\nreturn [{\n  json: {\n    top_winners_all: winners,   // CAC40 + S&P500 confondus avec noms complets si dispo\n    top_losers_all:  losers,\n    debug: {\n      inputs: items.length,\n      arrays_seen: allArrays.length,\n      name_map_size: symToFullName.size,\n      merged_count: merged.length\n    }\n  }\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1456,
+                3072
+            ],
+            "id": "abc89a77-977a-44d1-95e6-c1eb7b88339d",
+            "name": "Code in JavaScript41"
+        },
+        {
+            "parameters": {
+                "jsCode": "\nconst allInputs = $input.all().map(i => i.json);\n\n// Mapping secteurs (simplifi\u00e9 - tu peux l'enrichir)\nconst SECTORS = {\n  // \u00c9nergie\n  'TTE': '\u00c9nergie', 'TotalEnergies': '\u00c9nergie', 'TOTAL': '\u00c9nergie',\n  'XOM': '\u00c9nergie', 'CVX': '\u00c9nergie', 'BP': '\u00c9nergie', 'SHEL': '\u00c9nergie',\n  \n  // Luxe\n  'MC': 'Luxe', 'LVMH': 'Luxe', 'RMS': 'Luxe', 'KER': 'Luxe',\n  \n  // Banques\n  'BNP': 'Banque', 'GLE': 'Banque', 'ACA': 'Banque', 'SAN': 'Banque',\n  'JPM': 'Banque', 'BAC': 'Banque', 'WFC': 'Banque', 'C': 'Banque',\n  \n  // Tech\n  'AAPL': 'Tech', 'MSFT': 'Tech', 'GOOGL': 'Tech', 'AMZN': 'Tech',\n  'META': 'Tech', 'NVDA': 'Tech', 'TSLA': 'Tech', 'CAP': 'Tech',\n  \n  // Sant\u00e9/Pharma\n  'SAN': 'Sant\u00e9', 'SNY': 'Sant\u00e9', 'GSK': 'Sant\u00e9', 'NVS': 'Sant\u00e9',\n  'JNJ': 'Sant\u00e9', 'PFE': 'Sant\u00e9', 'UNH': 'Sant\u00e9',\n  \n  // Industrie\n  'AIR': 'A\u00e9ronautique', 'BA': 'A\u00e9ronautique', 'SAF': 'Industrie',\n  \n  // T\u00e9l\u00e9coms\n  'ORA': 'T\u00e9l\u00e9coms', 'VIV': 'T\u00e9l\u00e9coms', 'T': 'T\u00e9l\u00e9coms', 'VZ': 'T\u00e9l\u00e9coms',\n  \n  // Retail/Consommation\n  'OR': 'Luxe', 'WMT': 'Distribution', 'TGT': 'Distribution',\n  \n  // Automobile\n  'RNO': 'Automobile', 'STLAM': 'Automobile', 'F': 'Automobile',\n};\n\nfunction getSector(company, symbol) {\n  // Essaie par symbole d'abord\n  const sym = (symbol || '').replace(/\\..+$/, '').toUpperCase();\n  if (SECTORS[sym]) return SECTORS[sym];\n  \n  // Essaie par nom\n  const name = (company || '').toUpperCase();\n  for (const [key, sector] of Object.entries(SECTORS)) {\n    if (name.includes(key)) return sector;\n  }\n  \n  // D\u00e9tection par mots-cl\u00e9s dans le nom\n  if (name.includes('BANK') || name.includes('BANQUE')) return 'Banque';\n  if (name.includes('ENERGY') || name.includes('PETRO') || name.includes('OIL')) return '\u00c9nergie';\n  if (name.includes('TECH') || name.includes('SOFTWARE')) return 'Tech';\n  if (name.includes('PHARMA') || name.includes('HEALTH')) return 'Sant\u00e9';\n  \n  return 'Industrie'; // Fallback g\u00e9n\u00e9rique\n}\n\n// Collecter winners et losers\nlet winners = [];\nlet losers = [];\n\nfor (const item of allInputs) {\n  if (Array.isArray(item.top_winners_all)) {\n    winners.push(...item.top_winners_all);\n  }\n  if (Array.isArray(item.top_losers_all)) {\n    losers.push(...item.top_losers_all);\n  }\n}\n\n// Prendre le top 1 de chaque\nconst topGainer = winners[0];\nconst topLoser = losers[0];\n\nif (!topGainer && !topLoser) {\n  return [{\n    json: {\n      has_data: false,\n      top_gainer: null,\n      top_loser: null\n    }\n  }];\n}\n\n// Formatter les donn\u00e9es\nconst formatMover = (mover, type) => {\n  if (!mover) return null;\n  \n  const name = mover.name || mover.company || mover.symbol;\n  const symbol = mover.symbol;\n  const changePct = Number(mover.changePct || mover.change_pct || 0);\n  const sector = getSector(name, symbol);\n  \n  return {\n    name,\n    symbol,\n    change_pct: changePct,\n    change_formatted: changePct >= 0 ? `+${changePct.toFixed(1)}%` : `${changePct.toFixed(1)}%`,\n    sector,\n    type // 'gainer' ou 'loser'\n  };\n};\n\nconst top = formatMover(topGainer, 'gainer');\nconst flop = formatMover(topLoser, 'loser');\n\nreturn [{\n  json: {\n    has_data: true,\n    top_gainer: top,\n    top_loser: flop\n  }\n}];"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1664,
+                3072
+            ],
+            "id": "9a6d60de-ccb8-417e-9196-c55b81cb3736",
+            "name": "Code in JavaScript45"
+        },
+        {
+            "parameters": {
+                "modelId": {
+                    "__rl": true,
+                    "value": "gpt-4o-mini",
+                    "mode": "list",
+                    "cachedResultName": "GPT-4O-MINI"
+                },
+                "messages": {
+                    "values": [
+                        {
+                            "content": "=Fais moi un paragraphe avec le top ou flop du jour, l'entreprise du top est  {{ $json.top_gainer.name }}, sa vvartiation est {{ $json.top_gainer.change_formatted }}. Tu dois me donner son secteur et les raisons probables de son augmentation. Pour le flop du jour l'entreprise est {{ $json.top_loser.name }} et sa variation {{ $json.top_loser.change_formatted }}. Pareil tu me donnes son secteur et ses raisons probables en 2-3 phrases. Tu me dis le top de la semaine c'est et le Flop de la semaine c'est : ",
+                            "role": "system"
+                        },
+                        {
+                            "content": "TU me reformules toutes les donn\u00e9es du premier prompt de fa\u00e7on professionnelle. Avec des \u00e9mojis \u00e0 cot\u00e9 du flop et du top. Tu reformules en commen\u00e7ant par \"Le top de la semaine : \"; \"Le flop de la semaine :\""
+                        }
+                    ]
+                },
+                "jsonOutput": true,
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.openAi",
+            "typeVersion": 1.8,
+            "position": [
+                2160,
+                3072
+            ],
+            "id": "40d3e134-48c8-4c65-9d06-442d5848c8db",
+            "name": "Message a model6",
+            "credentials": {
+                "openAiApi": {
+                    "id": "b37wOuGNvfvbqApD",
+                    "name": "n8n free OpenAI API credits"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// Input attendu: { curated:{ indices:[], fx:[], commodities:[] } } ou { indices, fx, commodities }\nconst j = $json.curated ? $json.curated : $json;\n\n// helpers\nconst A = x => Array.isArray(x) ? x : [];\nconst num = v => (typeof v === \"number\" ? v : Number(String(v ?? \"\").replace(\",\", \".\")));\nconst findBy = (arr, {symbol, name}) => A(arr).find(x => {\n  const s = String(x.symbol||\"\").toUpperCase();\n  const n = String(x.name||\"\").toUpperCase();\n  return (symbol && s === symbol.toUpperCase()) || (name && n.includes(name.toUpperCase()));\n});\n\n// --- S\u00e9lections strictes\nconst CAC  = findBy(j.indices, { name: \"CAC 40\" }) || findBy(j.indices, { symbol: \"CAC\" }) || null;\nconst SPX  = findBy(j.indices, { symbol: \"SPX\" }) || findBy(j.indices, { name: \"S&P 500\" }) || null;\n\nconst EURUSD = findBy(j.fx, { symbol: \"EURUSD\" }) || findBy(j.fx, { name: \"EUR/USD\" }) || null;\n\nconst WTI = findBy(j.commodities, { symbol: \"WTI\" }) || findBy(j.commodities, { name: \"WTI\" }) || null;\nconst GOLD = findBy(j.commodities, { symbol: \"GOLD\" }) || findBy(j.commodities, { name: \"GOLD\" }) || null;\n\n// --- Normalisation des champs (indices: prev_close ; commodities: prev_value accept\u00e9 aussi)\nfunction normIndex(x){\n  if (!x) return null;\n  return {\n    name: x.name || x.symbol,\n    value: num(x.value),\n    prev_close: num(x.prev_close ?? x.previous ?? x.prevValue),\n    change_pct: num(x.change_pct ?? x.pct ?? x.changePercent)\n  };\n}\nfunction normFx(x){\n  if (!x) return null;\n  return {\n    symbol: x.symbol || x.name,\n    value: num(x.value)\n  };\n}\nfunction normCom(x){\n  if (!x) return null;\n  return {\n    name: x.name || x.symbol,\n    value: num(x.value),\n    prev_value: num(x.prev_value ?? x.prev_close ?? x.previous ?? x.prevValue),\n    change_pct: num(x.change_pct ?? x.pct ?? x.changePercent)\n  };\n}\n\nconst curated = {\n  indices: {\n    CAC:  normIndex(CAC),\n    SPX:  normIndex(SPX)\n  },\n  fx: {\n    EURUSD: normFx(EURUSD)\n  },\n  commodities: {\n    WTI:  normCom(WTI),\n    GOLD: normCom(GOLD)\n  }\n};\n\nreturn [{ json: { curated } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2240,
+                864
+            ],
+            "id": "2543a7ac-4e79-43cc-a7cd-eca4ffcbc6fe",
+            "name": "Code in JavaScript24"
+        },
+        {
+            "parameters": {
+                "jsCode": "// Input attendu : { curated: { indices:{CAC,SPX}, fx:{EURUSD}, commodities:{WTI,GOLD} } }\n\nconst d = $json.curated || {};\n\nfunction fmtInt(v){\n  const n = Number(v);\n  return Number.isFinite(n) ? Math.round(n).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ' ') : '\u2014';\n}\nfunction fmtPct(v){\n  const n = Number(v);\n  if (!Number.isFinite(n)) return '';\n  const sign = n >= 0 ? '+' : '';\n  return `(${sign}${n.toFixed(2).replace('.', ',')}%)`;\n}\nfunction fmtFx(v){\n  const n = Number(v);\n  return Number.isFinite(n) ? n.toFixed(4).replace('.', ',') : '\u2014';\n}\n\n// extraction s\u00e9curis\u00e9e\nconst CAC  = d.indices?.CAC  || {};\nconst SPX  = d.indices?.SPX  || {};\nconst EUR  = d.fx?.EURUSD    || {};\nconst WTI  = d.commodities?.WTI  || {};\nconst GOLD = d.commodities?.GOLD || {};\n\nreturn [{\n  json: {\n    formatted: {\n      \"CAC 40\":  `${fmtInt(CAC.value)} ${fmtPct(CAC.change_pct)}`,\n      \"S&P 500\": `${fmtInt(SPX.value)} ${fmtPct(SPX.change_pct)}`,\n      \"EUR/USD\": `${fmtFx(EUR.value)}`,\n      \"WTI\":     `${fmtInt(WTI.value)} ${fmtPct(WTI.change_pct)}`,\n      \"Or\":      `${fmtInt(GOLD.value)} ${fmtPct(GOLD.change_pct)}`\n    }\n  }\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2448,
+                864
+            ],
+            "id": "40738813-c39f-4ff8-98f9-fde2c79df724",
+            "name": "Code in JavaScript25"
+        },
+        {
+            "parameters": {
+                "url": "https://nfs.faireconomy.media/ff_calendar_thisweek.json?version=c581d0ceb1eac29eb61bd38041c5f136",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                304,
+                3456
+            ],
+            "id": "044b4288-4d79-42e2-b709-41d5c88a951c",
+            "name": "HTTP Request4"
+        },
+        {
+            "parameters": {
+                "jsCode": "const TZ = 'Europe/Paris';\nconst MAX_EU = 20, MAX_US = 20;\n\n// 1) Inputs\nconst items = $input.all().map(i => i.json);\n\n// 2) Helpers\nfunction toISO(ev){\n  const cands = [ev.date, ev.datetime, ev.utcTime, ev.timestamp];\n  for (const c of cands){\n    if (!c) continue;\n    const d = new Date(c);\n    if (!isNaN(d)) return d.toISOString();\n  }\n  if (ev.date && ev.time){\n    const d2 = new Date(`${ev.date} ${ev.time} UTC`);\n    if (!isNaN(d2)) return d2.toISOString();\n  }\n  return null;\n}\nfunction timeLocal(iso){\n  const d = new Date(iso);\n  return isNaN(d)\n    ? ''\n    : d.toLocaleString('fr-FR', { timeZone: TZ, hour: '2-digit', minute: '2-digit' });\n}\nfunction isMH(impactRaw, title){\n  const s = String(impactRaw||'').toLowerCase();\n  if (/\\bhigh\\b|haute|\u00e9lev|elev|3\\s*bull|strong/i.test(s)) return 'high';\n  if (/\\bmedium\\b|moyen|2\\s*bull|moderate/i.test(s)) return 'medium';\n  const t = String(title||'').toLowerCase();\n  if (/(cpi|hicp|inflation|nfp|payroll|emploi|unemployment|pmi|ism|retail\\s*sales|gdp|rate\\s*decision|fomc|ecb|boe|boj)/i.test(t)) return 'medium';\n  return '';\n}\nconst EXCLUDE = /(holiday|bank\\s*holiday|jour\\s*f\u00e9ri\u00e9|tentative|tba|all\\s*day|daylight\\s*saving|dst)/i;\nconst EU_TITLE = /(france|french|euro\\s*area|zone\\s*euro|eurozone|german|allemagne|spain|espagne|italy|italie)/i;\n\n// Utilitaires de date en TZ Paris\nfunction dateParisYYYYMMDD(d){\n  // Renvoie 'YYYY-MM-DD' dans le fuseau TZ\n  return d.toLocaleDateString('en-CA', { timeZone: TZ });\n}\nfunction isoToParisYYYYMMDD(iso){\n  const d = new Date(iso);\n  if (isNaN(d)) return '';\n  return dateParisYYYYMMDD(d);\n}\n\n// 3) Normalisation (Medium/High uniquement)\nlet norm = items.map(e=>{\n  const iso = toISO(e);\n  if (!iso) return null;\n  const title = String(e.title||'').trim();\n  if (EXCLUDE.test(title)) return null;\n\n  const mh = isMH(e.impact || e.impactText || e.impact_desc, title);\n  if (!mh) return null; // on garde seulement Medium/High\n\n  const d = new Date(iso);\n  if (isNaN(d)) return null;\n\n  return {\n    section: 'calendar',\n    event: title,\n    country: String(e.country||'').toUpperCase(),\n    importance: mh,\n    importance_score: mh==='high' ? 3 : 2,\n    previous: e.previous ?? null,\n    forecast: e.forecast ?? null,\n    actual: e.actual ?? null,\n    date_iso: iso,\n    time_local: timeLocal(iso),\n    ymd_paris: isoToParisYYYYMMDD(iso),\n  };\n}).filter(Boolean);\n\n// 4) Filtre : uniquement les \u00e9v\u00e9nements D'AUJOURD'HUI (heure Paris)\nconst todayParis = dateParisYYYYMMDD(new Date());\nnorm = norm.filter(x => x.ymd_paris === todayParis);\n\n// 5) Priorit\u00e9 : FR & US en premier, puis reste zone euro\nfunction isFR(e){ return e.country === 'FR'; }\nfunction isUS(e){ return e.country === 'USD'; }\nfunction isEU(e){\n  return e.country === 'EUR' ||\n         EU_TITLE.test(e.event.toLowerCase()) ||\n         ['DE','IT','ES','NL','BE','IE','PT','AT','FI','GR','LU'].includes(e.country);\n}\n\n// Tri par importance puis heure\nfunction sortImpTime(a,b){\n  return (b.importance_score - a.importance_score) ||\n         (new Date(a.date_iso) - new Date(b.date_iso));\n}\n\n// S\u00e9lections\nconst frToday = norm.filter(isFR).sort(sortImpTime);\nconst usToday = norm.filter(isUS).sort(sortImpTime);\nconst euToday = norm.filter(isEU).sort(sortImpTime);\n\n// Si pas assez d\u2019\u00e9v\u00e9nements FR, on compl\u00e8te EU, mais FR restent en t\u00eate\nconst euFinal = [...frToday, ...euToday.filter(x => !isFR(x))].slice(0, MAX_EU);\nconst usFinal = usToday.slice(0, MAX_US);\n\n// 6) HTML\nfunction row(x){\n  const dot = x.importance==='high' ? '\ud83d\udd34' : '\ud83d\udfe0';\n  return `<tr><td>${x.time_local||''}</td><td>${x.country||''}</td><td>${dot} ${x.event}</td></tr>`;\n}\nfunction block(title, rows){\n  if (!rows.length)\n    return `<h3>${title}</h3><div style=\"color:#666\">Aucun \u00e9v\u00e9nement important aujourd\u2019hui.</div>`;\n  return `<h3>${title}</h3>\n  <table width=\"100%\" cellpadding=\"4\" cellspacing=\"0\" style=\"border-collapse:collapse;font-family:Arial;font-size:13px\">\n    <thead><tr><th>Heure (Paris)</th><th>Pays</th><th>\u00c9v\u00e9nement</th></tr></thead>\n    <tbody>${rows.map(row).join('')}</tbody>\n  </table>`;\n}\n\nconst html_full = [\n  block('France / Zone Euro \u2014 \u00c9v\u00e9nements du jour (Medium+High)', euFinal),\n  block('\u00c9tats-Unis \u2014 \u00c9v\u00e9nements du jour (Medium+High)', usFinal),\n].join('<br/>');\n\n// 7) Ligne courte pour le brief\nconst topEvents = [...euFinal, ...usFinal]\n  .sort(sortImpTime)\n  .slice(0,3)\n  .map(x => `${x.time_local} ${x.event}`)\n  .join(', ') || 'Pas de publication majeure aujourd\u2019hui.';\nconst calendar_line = `\u00c0 suivre aujourd\u2019hui : ${topEvents}.`;\n\n// 8) Debug\nconst dbg = {\n  total_raw: items.length,\n  filtered_today: norm.length,\n  eu_count: euFinal.length,\n  us_count: usFinal.length,\n  today_paris: todayParis,\n};\n\n// 9) Sortie\nreturn [\n  { json: { tag:'eu_full', items: euFinal } },\n  { json: { tag:'us_full', items: usFinal } },\n  { json: { tag:'calendar_html_full', html: html_full } },\n  { json: { tag:'calendar_line', line: calendar_line } },\n  { json: { tag:'debug_counts', ...dbg } },\n];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                512,
+                3456
+            ],
+            "id": "aba8776f-44dc-490f-937d-aeb58873bc6f",
+            "name": "Code in JavaScript38"
+        },
+        {
+            "parameters": {
+                "operation": "extractHtmlContent",
+                "extractionValues": {
+                    "values": [
+                        {
+                            "key": "title",
+                            "cssSelector": "a[href*=\"/actualites/\"]",
+                            "returnArray": true
+                        },
+                        {
+                            "key": "url",
+                            "cssSelector": "a[href*=\"/actualites/\"]",
+                            "returnValue": "attribute",
+                            "attribute": "href",
+                            "returnArray": true
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.html",
+            "typeVersion": 1.2,
+            "position": [
+                512,
+                3616
+            ],
+            "id": "66c03de5-bce6-4a11-94a5-a4386a59b44d",
+            "name": "HTML"
+        },
+        {
+            "parameters": {
+                "jsCode": "// n8n Code node \u2014 Run once for all items\nconst input = $input.first().json || {};\nconst titles = Array.isArray(input.title) ? input.title : [];\nconst urls   = Array.isArray(input.url)   ? input.url   : [];\n\nconst out = [];\nconst n = Math.min(titles.length, urls.length);\n\nfunction normTitle(t){\n  if (typeof t === 'string') return t.trim();\n  if (t && typeof t.text === 'string') return t.text.trim();\n  return 'Article';\n}\n\nfor (let i = 0; i < n; i++){\n  let href = urls[i];\n  if (typeof href !== 'string') continue;\n\n  // garder uniquement les pages article (hash 40 hexa) et exclure /flux/\n  const isArticle = /[a-f0-9]{40}$/.test(href) && !href.includes('/flux/');\n  if (!isArticle) continue;\n\n  // URL absolue\n  if (!href.startsWith('http')) href = `https://www.boursedirect.fr${href}`;\n\n  const title = normTitle(titles[i])\n    .replace(/\\s+/g, ' ')\n    .replace(/(?:\\bAOF\\b|\\bBoursier\\b|\\bAFP\\b|\\bEuroland\\s+Corporate\\b)/gi, '')\n    .trim();\n\n  out.push({ json: { title: title || 'Article', url: href } });\n}\n\nreturn out;\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                800,
+                3616
+            ],
+            "id": "34a5e542-05f1-4fb6-b1c3-789efd58cd0a",
+            "name": "Code in JavaScript42"
+        },
+        {
+            "parameters": {
+                "url": "https://www.boursedirect.fr/fr/actualites/flux/points-de-marche",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                304,
+                3616
+            ],
+            "id": "9554f485-e17b-40df-bbbf-76444cc549fe",
+            "name": "Bourse Direct point march\u00e91"
+        },
+        {
+            "parameters": {
+                "url": "={{$json.url + ($json.url.includes('?') ? '&' : '?') + 'nocache=' + $now}}\n",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "User-agent",
+                            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+                        },
+                        {
+                            "name": "Accept-Language",
+                            "value": "fr-FR,fr;q=0.9,en;q=0.8"
+                        },
+                        {
+                            "name": "Accept-Encoding",
+                            "value": "gzip, deflate, br"
+                        },
+                        {
+                            "name": "Referer",
+                            "value": "https://www.boursedirect.fr/"
+                        }
+                    ]
+                },
+                "options": {
+                    "batching": {
+                        "batch": {
+                            "batchSize": 1,
+                            "batchInterval": 3000
+                        }
+                    },
+                    "response": {
+                        "response": {
+                            "responseFormat": "text"
+                        }
+                    },
+                    "timeout": 30000
+                }
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                1488,
+                3536
+            ],
+            "id": "cac4f9d9-7e34-40b9-adc1-356893939a15",
+            "name": "https request1",
+            "retryOnFail": true,
+            "maxTries": 5,
+            "waitBetweenTries": 60
+        },
+        {
+            "parameters": {
+                "jsCode": "// Extraction texte + published_at (robuste)\n// Attend en entr\u00e9e (apr\u00e8s merge par cl\u00e9 'url') : { title, url, body|data|binary }\n// Retourne : { title, url, text, published_at }\n\nconst TZ = 'Europe/Paris';\n\nfunction getHtml(item){\n  // Plusieurs emplacements possibles selon le HTTP node\n  if (typeof item.json?.data === 'string') return item.json.data;\n  if (typeof item.json?.body === 'string') return item.json.body;\n  if (item.binary?.data?.data){\n    try { return Buffer.from(item.binary.data.data, 'base64').toString('utf-8'); } catch(e){}\n  }\n  return '';\n}\n\nfunction pickContent(html){\n  // 1) <article>\u2026</article>\n  let m = html.match(/<article[^>]*>([\\s\\S]*?)<\\/article>/i);\n  if (m) return m[1];\n\n  // 2) <main>\u2026</main>\n  m = html.match(/<main[^>]*>([\\s\\S]*?)<\\/main>/i);\n  if (m) return m[1];\n\n  // 3) blocs usuels\n  m = html.match(/<(div|section)[^>]*?(id|class)\\s*=\\s*[\"'][^\"']*(article-body|post-content|entry-content|content|body|texte)[\"'][^>]*>([\\s\\S]*?)<\\/\\1>/i);\n  if (m) return m[4];\n\n  // 4) fallback : tout le HTML\n  return html;\n}\n\nfunction stripBoilerplate(txt){\n  // Enl\u00e8ve scripts/styles/menus/footers\n  return txt\n    .replace(/<script[^>]*>[\\s\\S]*?<\\/script>/gi, '')\n    .replace(/<style[^>]*>[\\s\\S]*?<\\/style>/gi, '')\n    .replace(/<(header|footer|nav|aside)[^>]*>[\\s\\S]*?<\\/\\1>/gi, '')\n    .replace(/<!--[\\s\\S]*?-->/g, '')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/\\s+/g, ' ')\n    .replace(/\\s{2,}/g, ' ')\n    // boilerplate courant\n    .replace(/(S'abonner|Abonnez-vous|Suivez[- ]nous|Mentions l\u00e9gales|Cookies|Newsletter)/gi, ' ')\n    .trim();\n}\n\nfunction extractPublishedAt(html){\n  // Plusieurs m\u00e9tas possibles sur les sites d'actu\n  let m =\n    html.match(/<meta[^>]+property=[\"']article:published_time[\"'][^>]+content=[\"']([^\"']+)[\"']/i) ||\n    html.match(/<meta[^>]+name=[\"']pubdate[\"'][^>]+content=[\"']([^\"']+)[\"']/i) ||\n    html.match(/<meta[^>]+name=[\"']date[\"'][^>]+content=[\"']([^\"']+)[\"']/i) ||\n    html.match(/<time[^>]+datetime=[\"']([^\"']+)[\"']/i);\n  if (m) {\n    const d = new Date(m[1]);\n    if (!isNaN(d)) return d.toISOString();\n  }\n  return null;\n}\n\nconst out = [];\nfor (const item of $input.all()){\n  const title = String(item.json?.title ?? '').trim();\n  // URL peut venir du flux titres (merge) ; sinon essaie de la r\u00e9cup\u00e9rer c\u00f4t\u00e9 http fullResponse si dispo\n  const url = String(item.json?.url ?? item.json?.requestUrl ?? item.json?.request?.url ?? '').trim();\n  const status = Number(item.json?.statusCode ?? 200);\n  const html = getHtml(item);\n\n  if (!title || !url || !html || html.length < 100){\n    out.push({ json: { title, url, text: null, published_at: null, error: 'No HTML body' }});\n    continue;\n  }\n  if (status === 503){\n    out.push({ json: { title, url, text: null, published_at: null, error: 'HTTP 503' }});\n    continue;\n  }\n\n  const core = pickContent(html);\n  let text = stripBoilerplate(core);\n\n  // petite s\u00e9curit\u00e9 langue FR (optionnelle, simple heuristique)\n  const isFrench = / le | la | les | des | une | un | et | ou | pour | selon | march\u00e9 /i.test(text);\n  if (!isFrench && text.length > 0){\n    // on laisse passer, mais tu peux filtrer ici si tu veux strict FR\n  }\n\n  // limite pour le LLM\n  if (text.length > 2000) text = text.slice(0, 2000);\n\n  const published_at = extractPublishedAt(html);\n\n  out.push({\n    json: {\n      title,\n      url,\n      text,\n      published_at\n    }\n  });\n}\n\nreturn out;\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2448,
+                3600
+            ],
+            "id": "22ea97c2-40c3-4ae0-9c63-137e378150ab",
+            "name": "Code in JavaScript43"
+        },
+        {
+            "parameters": {
+                "mode": "combine",
+                "combineBy": "combineByPosition",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                2112,
+                3600
+            ],
+            "id": "2ef53101-ee43-4809-9c54-8dc24f7b30e4",
+            "name": "Merge10",
+            "retryOnFail": true,
+            "maxTries": 5
+        },
+        {
+            "parameters": {
+                "amount": 0.1
+            },
+            "type": "n8n-nodes-base.wait",
+            "typeVersion": 1.1,
+            "position": [
+                1712,
+                3536
+            ],
+            "id": "e90e63cc-b272-45f9-86fc-46de3beb4c51",
+            "name": "Wait1",
+            "webhookId": "32f8ce9e-9e91-494a-bc56-30098af559f2"
+        },
+        {
+            "parameters": {
+                "jsCode": "const TZ = 'Europe/Paris';\nconst MAX_ITEMS = 3;\n\nfunction normalize(s){\n  return String(s || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase();\n}\n\nfunction escRe(s){ \n  return String(s).replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&'); \n}\n\nfunction kwHit(normText, kw){\n  const k = normalize(kw);\n  if (!k) return false;\n  try {\n    const isAlphaNum = /^[a-z0-9\\s]+$/i.test(k);\n    const pat = isAlphaNum ? new RegExp(`\\\\b${escRe(k)}\\\\b`, 'i') : new RegExp(escRe(k), 'i');\n    return pat.test(normText);\n  } catch(e) {\n    return normText.includes(k);\n  }\n}\n\nconst THEMES = [\n  { tag:'Fed', w:6, kws:['fed','fomc','powell','beige book','dot plot','rate decision','minutes'] },\n  { tag:'BCE', w:6, kws:['ecb','bce','lagarde','tltro','balance sheet'] },\n  { tag:'BOE', w:5, kws:['boe','bank of england'] },\n  { tag:'BOJ', w:5, kws:['boj','bank of japan','yield curve control','ycc'] },\n  { tag:'Taux US', w:5, kws:['taux','yield','treasury','ust 10','10 ans us'] },\n  { tag:'Taux EU', w:4, kws:['bund','oat','gilt','btp','eonia','estr'] },\n  { tag:'Inflation', w:6, kws:['inflation','cpi','hicp','ppi','core','pce','prix a la consommation'] },\n  { tag:'Emploi US', w:6, kws:['nfp','nonfarm','jobless','unemployment','claims','adp','emploi','chomage'] },\n  { tag:'Activite', w:5, kws:['pmi','ism','industrial production','retail sales','gdp','pib','ifo','zew'] },\n  { tag:'Energie', w:5, kws:['petrole','oil','wti','brent','opep','opec'] },\n  { tag:'FX', w:3, kws:['eurusd','dxy','dollar index','forex','devise'] },\n  { tag:'Marches', w:3, kws:['wall street','nasdaq','dow jones','cac 40','cac40','volatilite','vix'] },\n];\n\nconst POINT_DE_MARCHE_TITLE = ['point','seance','ouverture','cloture','bilan'];\nconst EXCLUSIONS = ['communique','relation investisseurs','publicite','newsletter'];\n\nconst seenTitle = new Set();\nconst out = [];\n\nconsole.log('=== DEBUG JS33 START ===');\nconsole.log('Items re\u00e7us:', $input.all().length);\n\nfor (const item of $input.all()){\n  const j = item.json || {};\n  const title = String(j.title || '').trim();\n  const url   = String(j.url || '').trim();\n  const text  = String(j.text || '').trim();\n\n  if (!title || !url || !text || text.length < 200) {\n    console.log('Filtr\u00e9 (texte court):', title);\n    continue;\n  }\n\n  // D\u00e9dup\n  const key = normalize(title);\n  if (seenTitle.has(key)) {\n    console.log('Filtr\u00e9 (doublon):', title);\n    continue;\n  }\n  seenTitle.add(key);\n\n  // Exclusions\n  const fullNorm  = normalize(title + ' ' + text);\n  const titleNorm = normalize(title);\n  if (EXCLUSIONS.some(x => kwHit(fullNorm, x))) {\n    console.log('Filtr\u00e9 (exclusion):', title);\n    continue;\n  }\n\n  // Scoring\n  let score = 0;\n  const themesHit = new Set();\n\n  for (const grp of THEMES){\n    const groupHit = grp.kws.some(k => kwHit(fullNorm, k));\n    if (groupHit){\n      score += grp.w;\n      themesHit.add(grp.tag);\n      const hitInTitle = grp.kws.some(k => kwHit(titleNorm, k));\n      if (hitInTitle) score += 3;\n    }\n  }\n\n  if (POINT_DE_MARCHE_TITLE.some(k => kwHit(titleNorm, k))) score += 3;\n  score += Math.min(text.length / 400, 8);\n\n  console.log('Article scor\u00e9:', title, '-> Score:', score);\n\n  out.push({\n    json: {\n      title,\n      url,\n      text: text.slice(0, 2000),\n      score: Math.round(score * 10) / 10,\n      published_at: j.published_at || new Date().toISOString(),\n      themes: Array.from(themesHit).slice(0, 6),\n    }\n  });\n}\n\nconsole.log('=== Articles apr\u00e8s filtres:', out.length);\n\nif (out.length === 0) {\n  console.log('\u26a0\ufe0f AUCUN ARTICLE - Retour fallback');\n  return [{ json: { \n    title: 'Aucun article disponible', \n    url: '', \n    text: 'Aucun article macro disponible pour le moment.', \n    score: 0, \n    themes: [],\n    published_at: new Date().toISOString()\n  }}];\n}\n\nconst top = out.sort((a, b) => b.json.score - a.json.score).slice(0, MAX_ITEMS);\nconsole.log('Top 3 articles:', top.map(x => ({ title: x.json.title, score: x.json.score })));\nconsole.log('=== DEBUG JS33 END ===');\n\nreturn top;"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2656,
+                3600
+            ],
+            "id": "46419a7a-ef53-45aa-97a3-78e30c94a7b7",
+            "name": "Code in JavaScript44",
+            "alwaysOutputData": true
+        },
+        {
+            "parameters": {
+                "jsCode": "const TZ = 'Europe/Paris';\nconst all = $input.all().map(i => i.json);\n\nconst get = (tag) => all.find(x => x.tag === tag) || {};\nconst eu = get('eu_full').items || [];\nconst us = get('us_full').items || [];\nconst line = (get('calendar_line').line) || '';\n\nconst nowParis = new Date(new Date().toLocaleString('en-CA',{ timeZone: TZ }));\n\n// Prochaine stat \u00e0 venir (EU+US)\nconst upcoming = [...eu, ...us]\n  .filter(x => x && x.date_iso && new Date(x.date_iso) >= nowParis)\n  .sort((a,b) => new Date(a.date_iso) - new Date(b.date_iso));\n\nconst next = upcoming[0] || null;\nconst next_event = next\n  ? `${next.time_local || ''} ${next.event}${next.country ? ' ('+next.country+')' : ''}`\n  : '';\n\nreturn [{ json: {\n  tag: 'calendar_bundle',\n  calendar_line: line || (next_event ? `\u00c0 suivre aujourd\u2019hui : ${next_event}.` : 'Pas de publication majeure aujourd\u2019hui.'),\n  next_event\n}}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                720,
+                3456
+            ],
+            "id": "0a6263b6-dab5-45ea-8bd9-ffe6febee4b9",
+            "name": "Code in JavaScript46"
+        },
+        {
+            "parameters": {},
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                3248,
+                3472
+            ],
+            "id": "02f17391-cab1-45e8-8549-717bbc6f94ea",
+            "name": "Merge11"
+        },
+        {
+            "parameters": {
+                "jsCode": "const TZ = 'Europe/Paris';\nconst MAX_SNIPPET = 1000;\n\nfunction decode(s = ''){\n  return String(s)\n    .replace(/&amp;/g, '&')\n    .replace(/&lt;/g, '<')\n    .replace(/&gt;/g, '>')\n    .replace(/&quot;/g, '\"')\n    .replace(/&#039;/g, \"'\")\n    .replace(/\\s+/g, ' ')\n    .trim();\n}\n\nfunction ensureArray(x){ \n  return Array.isArray(x) ? x : (x ? [x] : []); \n}\n\nconsole.log('=== DEBUG JS1 START ===');\n\nconst raw = $input.all().map(i => i.json);\nlet pool = [];\n\n// Collecter articles\nfor (const j of raw){\n  if (j && (j.title || j.text || j.url)) pool.push(j);\n  if (Array.isArray(j?.articles)) pool.push(...j.articles);\n  if (Array.isArray(j?.items)) pool.push(...j.items);\n}\n\nconsole.log('Pool total:', pool.length);\n\nconst seenUrls = new Set();\nlet items = [];\n\nfor (const it of pool){\n  const title = decode(it.title || '');\n  const url   = String(it.url || '').trim();\n  const text  = decode(it.text || it.snippet || '');\n  const themes = ensureArray(it.themes).map(x => String(x).trim()).filter(Boolean);\n  const score = Number(it.score ?? 0);\n\n  if (!title && !text) continue;\n\n  // D\u00e9dup URL\n  if (url && seenUrls.has(url)) continue;\n  if (url) seenUrls.add(url);\n\n  // Score > 0\n  if (!Number.isFinite(score) || score <= 0) continue;\n\n  items.push({ \n    title, \n    url, \n    text, \n    themes, \n    score, \n    published_at: it.published_at || new Date().toISOString()\n  });\n}\n\nconsole.log('Items apr\u00e8s filtres:', items.length);\n\nif (!items.length){\n  console.log('\u26a0\ufe0f AUCUN ITEM - Fallback');\n  return [{\n    json: {\n      tag: 'macro_bundle',\n      macro_headlines: [],\n      macro_themes: [],\n      macro_snippets: [],\n      macro_fulltexts: [],\n      macro_articles: []\n    }\n  }];\n}\n\n// Tri\nitems.sort((a, b) => {\n  const s = (b.score || 0) - (a.score || 0);\n  return s || ((b.text?.length || 0) - (a.text?.length || 0));\n});\n\nconst top = items.slice(0, 3);\n\n// Headlines\nconst seen = new Set();\nconst headlines = [];\nfor (const it of top){\n  const t = it.title || (it.text ? it.text.split('.')[0].slice(0, 120) : '');\n  const key = t.toLowerCase();\n  if (!t || seen.has(key)) continue;\n  headlines.push(t);\n  seen.add(key);\n}\n\n// Th\u00e8mes\nconst themeFreq = new Map();\nfor (const it of top){\n  for (const t of (it.themes || [])){\n    themeFreq.set(t, (themeFreq.get(t) || 0) + 1);\n  }\n}\n\nconst macro_themes = Array.from(themeFreq.entries())\n  .sort((a, b) => b[1] - a[1])\n  .map(([k]) => k)\n  .slice(0, 3);\n\n// Snippets\nconst macro_snippets = top.map(it => ({\n  title: it.title || it.text.slice(0, 80),\n  url: it.url || null,\n  snippet: it.text.slice(0, MAX_SNIPPET),\n  themes: it.themes || [],\n  score: it.score || 0,\n  published_at: it.published_at\n}));\n\nconst macro_fulltexts = top.map(it => ({\n  title: it.title,\n  url: it.url,\n  text: it.text\n}));\n\nconsole.log('Headlines:', headlines.length);\nconsole.log('Themes:', macro_themes);\nconsole.log('=== DEBUG JS1 END ===');\n\nreturn [{\n  json: {\n    tag: 'macro_bundle',\n    macro_headlines: headlines,\n    macro_themes,\n    macro_snippets,\n    macro_fulltexts,\n    macro_articles: macro_snippets,\n  }\n}];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2848,
+                3600
+            ],
+            "id": "7beea811-9108-4613-89bb-394ae98c0034",
+            "name": "Code in JavaScript47"
+        },
+        {
+            "parameters": {
+                "jsCode": "const all = $input.all().map(i => i.json);\n\nconsole.log('=== DEBUG JS2 START ===');\nconsole.log('Items re\u00e7us:', all.length);\n\nfunction findByTag(tag){\n  for (const o of all){\n    if (o && o.tag === tag) {\n      console.log('Tag trouv\u00e9:', tag);\n      return o;\n    }\n  }\n  return null;\n}\n\nconst macro = findByTag('macro_bundle') || {};\nconst cal   = findByTag('calendar_bundle') || {};\n\n// Fallback si macro est vide mais qu'on a des donn\u00e9es directes\nif (!macro.macro_headlines && all.length > 0) {\n  console.log('\u26a0\ufe0f macro_bundle vide, recherche alternative...');\n  const alt = all.find(x => Array.isArray(x?.macro_headlines));\n  if (alt) {\n    console.log('\u2705 Donn\u00e9es macro trouv\u00e9es sans tag');\n    Object.assign(macro, alt);\n  }\n}\n\nconsole.log('Macro headlines:', macro.macro_headlines?.length || 0);\nconsole.log('Macro themes:', macro.macro_themes?.length || 0);\nconsole.log('Macro snippets:', macro.macro_snippets?.length || 0);\nconsole.log('Calendar line:', cal.calendar_line || '(vide)');\nconsole.log('=== DEBUG JS2 END ===');\n\nreturn [{\n  json: {\n    macro_headlines: Array.isArray(macro.macro_headlines) ? macro.macro_headlines : [],\n    macro_themes: Array.isArray(macro.macro_themes) ? macro.macro_themes : [],\n    macro_snippets: Array.isArray(macro.macro_snippets) && macro.macro_snippets.length > 0 \n      ? macro.macro_snippets \n      : [all.find(x => x.text)?.text || ''], // Fallback sur le texte brut\n    calendar_line: cal.calendar_line || 'Pas de publication majeure aujourd\\'hui.'\n  }\n}];"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                3456,
+                3472
+            ],
+            "id": "d5a66d36-cbe7-4bc0-84af-9f53f4029e49",
+            "name": "Code in JavaScript48"
+        },
+        {
+            "parameters": {
+                "modelId": {
+                    "__rl": true,
+                    "value": "gpt-4.1-mini",
+                    "mode": "list",
+                    "cachedResultName": "GPT-4.1-MINI"
+                },
+                "messages": {
+                    "values": [
+                        {
+                            "content": "=R\u00e9cupere les infos dans macro headlines, macro snippets et calendar line et s\u00e9pare les en paragraphes sans inventer aucunes donn\u00e9es\n{{ $json.macro_headlines[0] }}\n{{ $json.macro_headlines[1] }}\n\n{{ $json.macro_snippets[0].title }}\n{{ $json.macro_snippets[0].snippet }}\n{{ $json.macro_snippets[1].title}}\n{{ $json.macro_snippets[1].snippet }}\n{{ $json.calendar_line }}"
+                        },
+                        {
+                            "content": "R\u00e9cup\u00e8re ce que le premier prompt a fait et transforme le n plusieurs paragraphes sans modifier aucune donn\u00e9es ou infos.\nPense bien a s\u00e9parer chaque th\u00e8mes en sautant des lignes et a ne pas faire de r\u00e9p\u00e9tition."
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.openAi",
+            "typeVersion": 1.8,
+            "position": [
+                3744,
+                3472
+            ],
+            "id": "7e616716-32d1-43e4-8c9a-9c8374a0d671",
+            "name": "Message a model1",
+            "credentials": {
+                "openAiApi": {
+                    "id": "b37wOuGNvfvbqApD",
+                    "name": "n8n free OpenAI API credits"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "/**\n * Input: aucun obligatoire si tu utilises PULL par nom de n\u0153ud.\n * Output: { subject, html }\n *\n * \u00c0 adapter si tes n\u0153uds ont d'autres noms.\n */\nconst PULL = {\n  market: 'SyntheseMarches',   // n\u0153ud qui renvoie { paragraph, bullets[] }\n  topflop: 'TopFlopFinal',     // n\u0153ud qui renvoie { gainer:{...}, loser:{...} } OU { top_du_jour:{...}, flop_du_jour:{...} }\n  briefing: 'BriefsLLM'        // (optionnel) n\u0153ud qui renvoie { content: \"long texte\" } ou { text }\n};\n\n// ---- helpers\nconst getFromNode = (name) => {\n  try { return $items(name, 0, 0).json || null; } catch { return null; }\n};\nconst esc = (s='') => String(s)\n  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')\n  .replace(/\"/g,'&quot;').replace(/'/g,'&#39;');\n\nconst fmtDate = new Date().toLocaleDateString('fr-FR',{ weekday:'long', year:'numeric', month:'long', day:'numeric' });\n\n// ---- 1) R\u00e9cup\u00e9ration des donn\u00e9es (march\u00e9 / top-flop / briefing)\nconst marketRaw = getFromNode(PULL.market) || $json.market || $json;\nconst topflopRaw = getFromNode(PULL.topflop) || $json.topflop || $json;\nconst briefingRaw = getFromNode(PULL.briefing) || $json.briefing || $json;\n\n// Normalise march\u00e9\nconst market = {\n  paragraph: marketRaw?.paragraph || '',\n  bullets: Array.isArray(marketRaw?.bullets) ? marketRaw.bullets : []\n};\n\n// Normalise top/flop (g\u00e8re les deux formats)\nfunction normTF(tf){\n  // nouveau format attendu { gainer:{name,symbol,change,title,intro,catalysts[]}, loser:{...} }\n  if (tf?.gainer || tf?.loser){\n    const pack = (x) => x ? {\n      name: x.name || x.entreprise || x.company || '',\n      symbol: x.symbol || x.ticker || '',\n      change: x.change || x.variation || '',\n      title: x.title || (x.name ? `${x.name} (${x.symbol||''}) \u2014 ${x.change||''}` : ''),\n      sector: x.sector || x.secteur || '',\n      intro: x.intro || x.raisons_probables || 'Non disponible',\n      catalysts: Array.isArray(x.catalysts) && x.catalysts.length ? x.catalysts\n                : (x.raisons_probables ? [x.raisons_probables] : ['Non disponible'])\n    } : null;\n    return { gainer: pack(tf.gainer), loser: pack(tf.loser),\n             top_of_week: tf.top_of_week || tf.top_de_la_semaine || null,\n             flop_of_week: tf.flop_of_week || tf.flop_de_la_semaine || null };\n  }\n  // ancien format { top_du_jour:{entreprise,variation,secteur,raisons_probables}, flop_du_jour:{...} }\n  if (tf?.top_du_jour || tf?.flop_du_jour){\n    const packOld = (x) => x ? ({\n      name: x.entreprise || '',\n      symbol: x.symbol || '',\n      change: x.variation || '',\n      title: x.entreprise ? `${x.entreprise}${x.symbol?` (${x.symbol})`:''} \u2014 ${x.variation||''}` : '',\n      sector: x.secteur || '',\n      intro: x.raisons_probables || 'Non disponible',\n      catalysts: x.raisons_probables ? [x.raisons_probables] : ['Non disponible']\n    }) : null;\n    return { gainer: packOld(tf.top_du_jour), loser: packOld(tf.flop_du_jour),\n             top_of_week: tf.top_de_la_semaine || null,\n             flop_of_week: tf.flop_de_la_semaine || null };\n  }\n  return { gainer:null, loser:null };\n}\nconst tf = normTF(topflopRaw);\n\n// Normalise briefing (texte libre optionnel)\nconst briefingText =\n  briefingRaw?.content?.text || briefingRaw?.content || briefingRaw?.text || '';\n\nconst sectionBriefing = briefingText\n  ? `<section class=\"card\">\n       <h2>Briefing</h2>\n       ${esc(String(briefingText)).split(/\\n{2,}/).map(p=>`<p>${p.replace(/\\n/g,'<br>')}</p>`).join('')}\n     </section>`\n  : '';\n\n// ---- 2) HTML\nconst css = `\n  :root{\n    --bg:#0b0c10; --cards:#12141a; --muted:#98a2b3; --txt:#e6e8ee;\n    --accent:#4f46e5; --up:#10b981; --down:#ef4444; --chip:#1f2430;\n  }\n  *{box-sizing:border-box}\n  body{margin:0;padding:32px;background:var(--bg);color:var(--txt);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial}\n  .wrap{max-width:860px;margin:0 auto}\n  .header{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}\n  .brand{font-weight:700;font-size:20px}\n  .date{color:var(--muted)}\n  .card{background:var(--cards);border:1px solid #1f2430;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 1px 0 rgba(255,255,255,.04) inset}\n  h1,h2{margin:0 0 12px 0}\n  h1{font-size:22px} h2{font-size:16px;color:#cbd5e1}\n  ul{margin:8px 0 0 18px} li{margin:6px 0}\n  .grid{display:grid;gap:14px}\n  @media(min-width:700px){ .grid.two{grid-template-columns:1fr 1fr} }\n  .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--muted);font-size:12px;margin-left:6px}\n  .pill{padding:2px 8px;border-radius:999px;font-weight:600}\n  .pill.up{background:rgba(16,185,129,.12);color:var(--up)}\n  .pill.down{background:rgba(239,68,68,.12);color:var(--down)}\n  .title{display:flex;align-items:center;gap:8px;flex-wrap:wrap}\n  .muted{color:var(--muted)}\n  .sources{font-size:12px;color:var(--muted)}\n`;\n\nconst topCard = (side, data) => {\n  if (!data) return '';\n  const dir = (data.change||'').trim().startsWith('-') ? 'down' : 'up';\n  return `\n  <section class=\"card\">\n    <div class=\"title\">\n      <h2>${side}</h2>\n      ${data.sector ? `<span class=\"badge\">${esc(data.sector)}</span>`:''}\n      ${data.symbol ? `<span class=\"badge\">${esc(data.symbol)}</span>`:''}\n      ${data.change ? `<span class=\"pill ${dir}\">${esc(data.change)}</span>`:''}\n    </div>\n    ${data.title ? `<p class=\"muted\">${esc(data.title)}</p>`:''}\n    ${data.intro ? `<p>${esc(data.intro)}</p>`:''}\n    ${Array.isArray(data.catalysts) && data.catalysts.length\n      ? `<div class=\"sources\"><strong>Catalyseurs</strong><ul>${\n           data.catalysts.map(c=>`<li>${esc(c)}</li>`).join('')\n         }</ul></div>` : ''\n    }\n  </section>`;\n};\n\nconst marketHTML = `\n<section class=\"card\">\n  <h2>Synth\u00e8se march\u00e9s</h2>\n  ${market.paragraph ? `<p>${esc(market.paragraph)}</p>`:''}\n  ${market.bullets.length ? `<ul>${market.bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>`:''}\n</section>`;\n\nconst weekly = (tf.top_of_week || tf.flop_of_week)\n  ? `<section class=\"card\">\n       <h2>Top / Flop de la semaine</h2>\n       <p>${tf.top_of_week ? `Top : ${esc(tf.top_of_week)}`:''}\n          ${tf.flop_of_week ? `<br>Flop : ${esc(tf.flop_of_week)}`:''}</p>\n     </section>` : '';\n\nconst html = `\n<!doctype html>\n<html lang=\"fr\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Morning \u2013 ${fmtDate}</title>\n<style>${css}</style>\n<body>\n  <div class=\"wrap\">\n    <header class=\"header\">\n      <div class=\"brand\">Morning Meeting</div>\n      <div class=\"date\">${esc(fmtDate)}</div>\n    </header>\n\n    ${marketHTML}\n\n    <div class=\"grid two\">\n      ${topCard('Top du jour', tf.gainer)}\n      ${topCard('Flop du jour', tf.loser)}\n    </div>\n\n    ${weekly}\n    ${sectionBriefing}\n  </div>\n</body>\n</html>`;\n\n// Sujet d\u2019email pratique\nconst subject = `Morning \u2013 ${fmtDate}`;\n\nreturn [{ json: { subject, html } }];\n"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                5584,
+                2208
+            ],
+            "id": "c2ec3368-1017-4831-9d9e-9830cd1df583",
+            "name": "Code in JavaScript23"
+        },
+        {
+            "parameters": {
+                "sendTo": "spmorningmeeting@gmail.com",
+                "subject": "={{$json.subject}}",
+                "message": "={{$json.html}}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.gmail",
+            "typeVersion": 2.1,
+            "position": [
+                5808,
+                2208
+            ],
+            "id": "dfcb8947-a07e-480c-b5b7-da58b8e00a28",
+            "name": "Send a message",
+            "webhookId": "8c36cfc9-4f0d-436e-a5f6-63b7e911cf05",
+            "credentials": {
+                "gmailOAuth2": {
+                    "id": "F71BB4kzOlhiFjMR",
+                    "name": "Gmail account"
+                }
+            }
+        }
+    ],
+    "pinData": {},
+    "connections": {
+        "Schedule Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "CAC40",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "S&P",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "NDX",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "DAX",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Dow Jones",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Nikkei 225",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "US 10A",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "DE 10Y",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "OAT 10Y",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "UK 10Y",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "HTTP Request",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "WTI",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Gold",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Us Inflation",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Ch\u00f4mage US",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Inflation France",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Ch\u00f4mage France",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "HTTP Request3",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "HTTP Request6",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "HTTP Request4",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Bourse Direct point march\u00e91",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript1": {
+            "main": [
+                [
+                    {
+                        "node": "Merge",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript2": {
+            "main": [
+                [
+                    {
+                        "node": "Merge",
+                        "type": "main",
+                        "index": 1
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript3": {
+            "main": [
+                [
+                    {
+                        "node": "Merge",
+                        "type": "main",
+                        "index": 2
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript4": {
+            "main": [
+                [
+                    {
+                        "node": "Merge",
+                        "type": "main",
+                        "index": 3
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript5": {
+            "main": [
+                [
+                    {
+                        "node": "Merge",
+                        "type": "main",
+                        "index": 4
+                    }
+                ]
+            ]
+        },
+        "CAC40": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "S&P": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript2",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "NDX": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "DAX": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Dow Jones": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript5",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript6": {
+            "main": [
+                [
+                    {
+                        "node": "Merge",
+                        "type": "main",
+                        "index": 5
+                    }
+                ]
+            ]
+        },
+        "Aggregate": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript7",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Nikkei 225": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript6",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Merge": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript7": {
+            "main": [
+                [
+                    {
+                        "node": "Merge3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "US 10A": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript": {
+            "main": [
+                [
+                    {
+                        "node": "Merge1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript8": {
+            "main": [
+                [
+                    {
+                        "node": "Merge1",
+                        "type": "main",
+                        "index": 1
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript9": {
+            "main": [
+                [
+                    {
+                        "node": "Merge1",
+                        "type": "main",
+                        "index": 2
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript10": {
+            "main": [
+                [
+                    {
+                        "node": "Merge1",
+                        "type": "main",
+                        "index": 3
+                    }
+                ]
+            ]
+        },
+        "DE 10Y": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript8",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "OAT 10Y": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript9",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "UK 10Y": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript10",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Merge1": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Aggregate1": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript11",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript11": {
+            "main": [
+                [
+                    {
+                        "node": "Merge3",
+                        "type": "main",
+                        "index": 1
+                    }
+                ]
+            ]
+        },
+        "HTTP Request": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript12",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript12": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate2",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Aggregate2": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript13",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript13": {
+            "main": [
+                [
+                    {
+                        "node": "Merge3",
+                        "type": "main",
+                        "index": 2
+                    }
+                ]
+            ]
+        },
+        "WTI": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript14",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Gold": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript15",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript14": {
+            "main": [
+                [
+                    {
+                        "node": "Merge2",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript15": {
+            "main": [
+                [
+                    {
+                        "node": "Merge2",
+                        "type": "main",
+                        "index": 1
+                    }
+                ]
+            ]
+        },
+        "Aggregate3": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript16",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript16": {
+            "main": [
+                [
+                    {
+                        "node": "Merge3",
+                        "type": "main",
+                        "index": 3
+                    }
+                ]
+            ]
+        },
+        "Merge2": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Merge3": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript17",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Us Inflation": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript18",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript18": {
+            "main": [
+                [
+                    {
+                        "node": "Merge4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript19": {
+            "main": [
+                [
+                    {
+                        "node": "Merge4",
+                        "type": "main",
+                        "index": 1
+                    }
+                ]
+            ]
+        },
+        "Ch\u00f4mage US": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript19",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Inflation France": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript20",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Ch\u00f4mage France": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript21",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript20": {
+            "main": [
+                [
+                    {
+                        "node": "Merge4",
+                        "type": "main",
+                        "index": 2
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript21": {
+            "main": [
+                [
+                    {
+                        "node": "Merge4",
+                        "type": "main",
+                        "index": 3
+                    }
+                ]
+            ]
+        },
+        "Merge4": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate4",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Aggregate4": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript22",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript17": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript31",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript31": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript24",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request3": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript34",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript34": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate7",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Aggregate7": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript37",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript37": {
+            "main": [
+                [
+                    {
+                        "node": "Merge8",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request6": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript39",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript39": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate8",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Aggregate8": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript40",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript40": {
+            "main": [
+                [
+                    {
+                        "node": "Merge8",
+                        "type": "main",
+                        "index": 1
+                    }
+                ]
+            ]
+        },
+        "Merge8": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript41",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript41": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript45",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript45": {
+            "main": [
+                [
+                    {
+                        "node": "Message a model6",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Message a model6": {
+            "main": [
+                [
+                    {
+                        "node": "Merge6",
+                        "type": "main",
+                        "index": 2
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript24": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript25",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript25": {
+            "main": [
+                [
+                    {
+                        "node": "Merge6",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request4": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript38",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript38": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript46",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTML": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript42",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript42": {
+            "main": [
+                [
+                    {
+                        "node": "Merge10",
+                        "type": "main",
+                        "index": 1
+                    },
+                    {
+                        "node": "https request1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Bourse Direct point march\u00e91": {
+            "main": [
+                [
+                    {
+                        "node": "HTML",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "https request1": {
+            "main": [
+                [
+                    {
+                        "node": "Wait1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript43": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript44",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Merge10": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript43",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Wait1": {
+            "main": [
+                [
+                    {
+                        "node": "Merge10",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript44": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript47",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript46": {
+            "main": [
+                [
+                    {
+                        "node": "Merge11",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Merge11": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript48",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript47": {
+            "main": [
+                [
+                    {
+                        "node": "Merge11",
+                        "type": "main",
+                        "index": 1
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript48": {
+            "main": [
+                [
+                    {
+                        "node": "Message a model1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Message a model1": {
+            "main": [
+                [
+                    {
+                        "node": "Merge6",
+                        "type": "main",
+                        "index": 1
+                    }
+                ]
+            ]
+        },
+        "Merge6": {
+            "main": [
+                [
+                    {
+                        "node": "Code in JavaScript23",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code in JavaScript23": {
+            "main": [
+                [
+                    {
+                        "node": "Send a message",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": false,
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "versionId": "0006a86f-d7d5-464f-bfa7-169c37cb0721",
+    "meta": {
+        "instanceId": "26fd1c96258898384e12bd911fea32044f0d879731b92e25f2c899216dc24288"
+    },
+    "id": "tsY1TBnTLwLtMPLw",
+    "tags": []
+}
